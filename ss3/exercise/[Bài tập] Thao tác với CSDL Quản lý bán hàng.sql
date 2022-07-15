@@ -20,7 +20,8 @@ create table dat_hang(
     cID int,
     oDate datetime,
     oTotalPrice int,
-    foreign key (cID) references khach_hang(cID)
+    foreign key (cID) 
+		references khach_hang(cID)
 );
 
 insert into dat_hang(oID,cID,oDate)
@@ -46,8 +47,10 @@ create table chi_tiet_dat(
     pID int,
     odQTY int,
     primary key (oID, pID),
-    foreign key (oID) references dat_hang(oID),
-    foreign key (pID) references san_pham(pID)
+    foreign key (oID)
+		references dat_hang(oID),
+    foreign key (pID) 
+		references san_pham(pID)
 );
 
 insert into chi_tiet_dat
