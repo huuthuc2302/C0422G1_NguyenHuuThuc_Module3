@@ -13,8 +13,8 @@ create table Class(
 
 insert into Class
 values (1, 'A1', '2008-12-20', 1),
-		(2, 'A2', '2008-12-22', 1),
-		(3, 'B3', current_date, 0);
+	   (2, 'A2', '2008-12-22', 1),
+	   (3, 'B3', current_date, 0);
 
 create table Student(
 	StudentID int not null primary key auto_increment ,
@@ -23,7 +23,8 @@ create table Student(
     Phone varchar(20),
     `Status` Bit,
     ClassID int not null,
-    foreign key (ClassID) references Class(ClassID)
+    foreign key (ClassID) 
+		references Class(ClassID)
 );
 
 insert into Student (StudentName, Address, Phone, `Status`, ClassId)
@@ -51,8 +52,10 @@ create table Mark (
     Mark float default 0 check (Mark between 0 and 100),
     ExamTimes tinyint default 1,
     unique (SubID, StudentID),
-    foreign key (SubID) references `Subject`(SubID),
-    foreign key (StudentID) references Student(StudentID)
+    foreign key (SubID)
+		references `Subject`(SubID),
+    foreign key (StudentID) 
+		references Student(StudentID)
 );
 
 insert into Mark (SubId, StudentId, Mark, ExamTimes)
