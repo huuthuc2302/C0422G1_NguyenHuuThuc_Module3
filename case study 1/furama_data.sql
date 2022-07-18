@@ -42,7 +42,7 @@ create table nhan_vien(
     foreign key(ma_bo_phan) references bo_phan(ma_bo_phan)
 );
 
-insert into nhan_vien
+insert into nhan_vien (ma_nhan_vien, ho_ten, ngay_sinh, so_cmnd, luong, so_dien_thoai, email, dia_chi, ma_vi_tri, ma_trinh_do, ma_bo_phan)
 values ("1","Nguyễn Văn An","1970-11-07","456231786","10000000","0901234121","annguyen@gmail.com","295 Nguyễn Tất Thành, Đà Nẵng","1","3","1"),
 		("2","Lê Văn Bình","1997-04-09","654231234","7000000","0934212314","binhlv@gmail.com","22 Yên Bái, Đà Nẵng","1","2","2"),
 		("3","Hồ Thị Yến","1995-12-12","999231723","14000000","0412352315","thiyen@gmail.com","K234/11 Điện Biên Phủ, Gia Lai","1","3","2"),
@@ -118,12 +118,12 @@ create table dich_vu(
 );
 
 insert into dich_vu
-values ("1","Villa Beach Front","25000","1000000","10","3","1","Có hồ bơi","vip","500","4","null"),
-		("2","House Princess 01","14000","5000000","7","2","2","Có thêm bếp nướng","vip","0","3","null"),
-		("3","Room Twin 01","5000","1000000","2","4","3","Có tivi","normal","0","0","1 Xe máy, 1 Xe đạp"),
-		("4","Villa No Beach Front","22000","9000000","8","3","1","Có hồ bơi","normal","300","3","null"),
-		("5","House Princess 02","10000","4000000","5","3","2","Có thêm bếp nướng","normal","0","2","null"),
-		("6","Room Twin 02","3000","900000","2","4","3","Có tivi","normal","0","0","1 Xe máy");
+values ("1","Villa Beach Front","25000","1000000","10","3","1","Có hồ bơi","vip","500","4",null),
+		("2","House Princess 01","14000","5000000","7","2","2","Có thêm bếp nướng","vip",null,"3",null),
+		("3","Room Twin 01","5000","1000000","2","4","3","Có tivi","normal",null,null,"1 Xe máy, 1 Xe đạp"),
+		("4","Villa No Beach Front","22000","9000000","8","3","1","Có hồ bơi","normal","300","3",null),
+		("5","House Princess 02","10000","4000000","5","3","2","Có thêm bếp nướng","normal",null,"2",null),
+		("6","Room Twin 02","3000","900000","2","4","3","Có tivi","normal",null,null,"1 Xe máy");
 
 create table hop_dong(
 	ma_hop_dong int primary key,
@@ -186,3 +186,65 @@ values (1, 2, 4, 5),
 		(6, 1, 3, 1),
 		(7, 1, 2, 2),
 		(8, 12, 2, 2);
+
+-- 2.Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là 
+-- một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự
+ select * 
+ from nhan_vien
+ where ( ho_ten like 'H%' or ho_ten like 'T%' or ho_ten like 'K%' ) and (char_length(ho_ten) <= 15)
+ order by ho_ten;
+ 
+ -- 3. Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi
+ -- và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”.
+ 
+ select * 
+ from khach_hang
+ where ((timestampdiff(year,ngay_sinh,curdate()) >=18) and (timestampdiff(year,ngay_sinh,curdate()) <=50)) and  (dia_chi like "%Đà Nẵng" or dia_chi like "%Quảng Trị");
+ 
+ -- 4. Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. 
+ -- Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng. 
+ -- Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.
+ 
+ select khach_hang.ma_khach_hang, khach_hang.ho_ten, count(*) as so_lan_dat_phong
+from
+    loai_khach
+        join
+    khach_hang on loai_khach.ma_loai_khach = khach_hang.ma_loai_khach
+        join
+    hop_dong on hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
+where
+    loai_khach.ten_loai_khach = 'Diamond'
+group by hop_dong.ma_khach_hang
+order by so_lan_dat_phong;
+
+-- 5.	Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tong_tien
+--  (Với tổng tiền được tính theo công thức như sau: Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet)
+-- cho tất cả các khách hàng đã từng đặt phòng. (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+select
+    khach_hang.ma_khach_hang,
+    khach_hang.ho_ten,
+    loai_khach.ten_loai_khach,
+    hop_dong.ma_hop_dong,
+    dich_vu.ten_dich_vu,
+    hop_dong.ngay_lam_hop_dong,
+    hop_dong.ngay_ket_thuc,
+    case
+        when hop_dong_chi_tiet.so_luong is null then sum(dich_vu.chi_phi_thue)
+        else sum(dich_vu.chi_phi_thue + hop_dong_chi_tiet.so_luong * dich_vu_di_kem.gia)
+    end as tong_tien
+from
+    loai_khach
+        left join
+    khach_hang on loai_khach.ma_loai_khach = khach_hang.ma_loai_khach
+        left join
+    hop_dong on hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
+        left join
+    dich_vu on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+        left join
+    hop_dong_chi_tiet on hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
+        left join
+    dich_vu_di_kem on dich_vu_di_kem.ma_dich_vu_di_kem = hop_dong_chi_tiet.ma_dich_vu_di_kem
+group by case
+    when hop_dong.ma_hop_dong is null then ho_ten
+    else hop_dong.ma_hop_dong
+end;
