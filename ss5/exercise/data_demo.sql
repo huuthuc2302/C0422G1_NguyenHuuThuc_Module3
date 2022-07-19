@@ -16,9 +16,9 @@ create table products(
 
 insert into products (Id , productCode, productName , productPrice , productAmount , productDescription , productStatus)
 value ('1','147','Iphone 13 Pro Max','27000000','10','hàng chính hãng','new seal'),
-('2','258','Iphone 12 ','20000000','15','hàng chính hãng','used'),
-('3','369','Samsung Note 22','30000000','20','hàng chính hãng','new seal'),
-('4','789','Xiaomi Mi Mix 3','18000000','5','hàng nhập khẩu','used');
+	('2','258','Iphone 12 ','20000000','15','hàng chính hãng','used'),
+	('3','369','Samsung Note 22','30000000','20','hàng chính hãng','new seal'),
+	('4','789','Xiaomi Mi Mix 3','18000000','5','hàng nhập khẩu','used');
 
 -- Tạo Unique Index trên bảng Products (sử dụng cột productCode để tạo chỉ mục)
 create unique index i_productCode on products (productCode);
