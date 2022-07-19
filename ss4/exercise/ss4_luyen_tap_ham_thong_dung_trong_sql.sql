@@ -1,8 +1,8 @@
-drop database if exists quan_ly_sinh_vien_2;
+drop database if exists quan_ly_sinh_vien_ss4;
 
-create database quan_ly_sinh_vien_2;
+create database quan_ly_sinh_vien_ss4;
 
-use quan_ly_sinh_vien_2;
+use quan_ly_sinh_vien_ss4;
 
 create table Class(
 	ClassID int not null primary key auto_increment ,
@@ -97,10 +97,10 @@ where
 -- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
        
 select 
-    stu.*, avg(m.Mark)
+    stu.*, avg(m.Mark) as diem_trung_binh
 from
     Student stu
         join
     Mark m on stu.StudentID = m.StudentID
-group by stu.StudentID , stu.StudentName
-order by m.Mark desc;
+group by stu.StudentID 
+order by diem_trung_binh desc;

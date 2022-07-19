@@ -1,8 +1,8 @@
-drop database if exists quan_ly_don_hang;
+drop database if exists quan_ly_don_hang_ss2;
 
-create database quan_ly_don_hang;
+create database quan_ly_don_hang_ss2;
 
-use quan_ly_don_hang;
+use quan_ly_don_hang_ss2;
 
 create table phieu_xuat (
     ma_phieu_xuat int primary key auto_increment,

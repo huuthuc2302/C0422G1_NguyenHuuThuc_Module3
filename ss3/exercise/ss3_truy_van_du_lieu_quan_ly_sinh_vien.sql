@@ -1,8 +1,8 @@
-drop database if exists quan_ly_sinh_vien;
+drop database if exists quan_ly_sinh_vien_ss3;
 
-create database quan_ly_sinh_vien;
+create database quan_ly_sinh_vien_ss3;
 
-use quan_ly_sinh_vien;
+use quan_ly_sinh_vien_ss3;
 
 create table Class(
 	ClassID int not null primary key auto_increment ,
@@ -73,7 +73,7 @@ where s.StudentName like 'h%';
 
 select * 
 from Class c 
-where month(StartDate) = '12'; 
+where month(StartDate) = 12; 
 
 -- Hiển thị tất cả các thông tin môn học có credit trong khoảng từ 3-5.
 
@@ -84,8 +84,8 @@ where Creadit between 3 and 5;
 -- Thay đổi mã lớp(ClassID) của sinh viên có tên ‘Hung’ là 2.
 
 update Student
-set Student.ClassID = "2"
-where StudentName = "Hung";
+set Student.ClassID = 2
+where StudentName = 'Hung';
 
 -- Hiển thị các thông tin: StudentName, StudentName, Mark. Dữ liệu sắp xếp theo điểm thi (mark) giảm dần. nếu trùng sắp theo tên tăng dần. 
 

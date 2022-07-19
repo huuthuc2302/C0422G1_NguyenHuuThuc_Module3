@@ -1,8 +1,8 @@
-drop database if exists thao_tac_ban_hang;
+drop database if exists thao_tac_ban_hang_ss3;
 
-create database thao_tac_ban_hang;
+create database thao_tac_ban_hang_ss3;
 
-use thao_tac_ban_hang;
+use thao_tac_ban_hang_ss3;
 
 create table khach_hang(
 	cID int primary key,
