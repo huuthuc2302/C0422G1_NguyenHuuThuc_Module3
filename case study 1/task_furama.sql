@@ -292,12 +292,101 @@ having count(hd.ma_nhan_vien) <= 3;
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
 
--- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, 
+set sql_safe_updates = 0;
+delete from nhan_vien 
+where
+    ma_nhan_vien not in (select 
+        ma_nhan_vien
+    from
+        hop_dong
+    
+    where
+        year(ngay_lam_hop_dong) between 2019 and 2021);
+set sql_safe_updates = 1;
+
+-- 17.	Cập nhật thông tin những khách hàng có ma_loai_khach từ Platinum lên Diamond, 
 -- -- -- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
+
+update khach_hang 
+set 
+    ma_loai_khach = 1
+where
+    ma_khach_hang in (select 
+            ma_khach_hang
+        from
+            (select 
+                kh.ma_khach_hang,
+				kh.ho_ten,
+				sum(dv.chi_phi_thue + ifnull(hdct.so_luong * dvdk.gia, 0)) as tong_tien
+            from
+                khach_hang kh
+            left join hop_dong hd on hd.ma_khach_hang = kh.ma_khach_hang
+            left join dich_vu dv on dv.ma_dich_vu = hd.ma_dich_vu
+            left join hop_dong_chi_tiet hdct on hdct.ma_hop_dong = hd.ma_hop_dong
+            left join dich_vu_di_kem dvdk on dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem
+            where
+                kh.ma_loai_khach = 2
+            group by hd.ma_hop_dong
+            having tong_tien > 1000000) as temp);
 
 -- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
 
+set sql_safe_updates = 0;
+set foreign_key_checks = 0;
+delete from khach_hang 
+where
+    ma_khach_hang in (select 
+        ma_khach_hang
+    from
+        hop_dong hd
+    
+    where
+        year(ngay_lam_hop_dong) < 2021);
+	
+    set sql_safe_updates = 1;
+    set foreign_key_checks = 1;
+
 -- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+
+set sql_safe_updates = 0;
+set foreign_key_checks = 0;
+update dich_vu_di_kem 
+set 
+    gia = gia * 2
+where
+    ma_dich_vu_di_kem in (select 
+            ma_dich_vu_di_kem
+        from
+            (select 
+                hdct.ma_dich_vu_di_kem, sum(hdct.so_luong) as so_lan_su_dung
+            from
+                hop_dong_chi_tiet hdct
+            join hop_dong hd on hd.ma_hop_dong = hdct.ma_hop_dong
+            where
+                year(hd.ngay_lam_hop_dong) = 2020
+            group by ma_dich_vu_di_kem
+            having so_lan_su_dung > 10) as temp);
+set sql_safe_updates = 1;
+set foreign_key_checks = 1;
 
 -- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống,
 -- -- -- thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+
+select 
+    ma_nhan_vien as id,
+    ho_ten,
+    email,
+    so_dien_thoai,
+    ngay_sinh,
+    dia_chi
+from
+    nhan_vien 
+union select 
+    ma_khach_hang as id,
+    ho_ten,
+    email,
+    so_dien_thoai,
+    ngay_sinh,
+    dia_chi
+from
+    khach_hang; 
