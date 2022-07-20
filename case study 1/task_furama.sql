@@ -179,20 +179,20 @@ select
 from
     hop_dong hd
         join
-    hop_dong_chi_tiet ct on hd.ma_hop_dong = ct.ma_hop_dong
+    hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
         join
-    dich_vu_di_kem dvdk on ct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+    dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
         join
     khach_hang kh on hd.ma_khach_hang = kh.ma_khach_hang
         join
     loai_khach lk on kh.ma_loai_khach = lk.ma_loai_khach
 where
-    lk.ten_loại_khach = 'Diamond'
+    lk.ten_loai_khach = 'Diamond'
         and (kh.dia_chi like '% Vinh'
         or kh.dia_chi like '% Quảng Ngãi');
 
 -- 12.	Hiển thị thông tin ma_hop_dong, ho_ten (nhân viên), ho_ten (khách hàng), so_dien_thoai (khách hàng), ten_dich_vu,
--- -- --  so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem), tien_dat_coc của tất cả các dịch vụ
+-- -- --  so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở hop_dong_chi_tiet), tien_dat_coc của tất cả các dịch vụ
 -- -- --  đã từng được khách hàng đặt vào 3 tháng cuối năm 2020 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2021.
 
 select 
@@ -201,22 +201,19 @@ select
     kh.ho_ten as ho_ten_khach_hang,
     kh.so_dien_thoai as sdt_khach_hang,
     hd.ma_dich_vu,
-    dv.ten_dich_vu,
     hd.tien_dat_coc,
     hd.ngay_lam_hop_dong,
-    ifnull(sum(ct.so_lương), 0) as 'số lượng'
+    ifnull(sum(hdct.so_luong), 0) as so_luong_dich_vu_di_kem
 from
     khach_hang kh
          left join
-    hop_dong hd ON kh.ma_khach_hang = hd.ma_khach_hang
+    hop_dong hd on kh.ma_khach_hang = hd.ma_khach_hang
          left join
-    nhan_vien nv ON hd.ma_nhan_vien = nv.ma_nhan_vien
+    nhan_vien nv on hd.ma_nhan_vien = nv.ma_nhan_vien
         left  join
-    dich_vu dv ON hd.ma_dich_vu = dv.ma_dich_vu
+    dich_vu dv on hd.ma_dich_vu = dv.ma_dich_vu
         left  join
-    hop_dong_chi_tiet ct on hd.ma_hop_dong = ct.ma_hop_dong
-        left  join
-    dich_vu_di_kem dvdk on ct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+    hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
 where
     (month(hd.ngay_lam_hop_dong) in (10 , 11, 12))
         and hd.ma_hop_dong not in (select 
@@ -233,16 +230,14 @@ where
 select 
     dvdk.ma_dich_vu_di_kem,
     dvdk.ten_dich_vu_di_kem,
-    sum(hdct.so_lương) as so_luong_dich_vu_di_kem
+    sum(hdct.so_luong) as so_luong_dich_vu_di_kem
 from
-    hop_dong hd
-        join
-    hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
+    hop_dong_chi_tiet hdct 
         join
     dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
 group by ma_dich_vu_di_kem
-having sUm(hdct.so_lương) >= All (seLect 
-        SUM(hdct.so_lương)
+having sum(hdct.so_luong) >= all (seLect 
+        sum(hdct.so_luong)
     from
         hop_dong_chi_tiet hdct
     group by hdct.ma_dich_vu_di_kem);
