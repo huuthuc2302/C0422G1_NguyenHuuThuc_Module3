@@ -230,18 +230,21 @@ where
 select 
     dvdk.ma_dich_vu_di_kem,
     dvdk.ten_dich_vu_di_kem,
-    sum(hdct.so_luong) as so_luong_dich_vu_di_kem
+    sum(hdct.so_luong) as so_lan_su_dung
 from
     hop_dong_chi_tiet hdct 
         join
     dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
-group by ma_dich_vu_di_kem
-having sum(hdct.so_luong) >= all (seLect 
-        sum(hdct.so_luong)
+group by hdct.ma_dich_vu_di_kem
+having so_lan_su_dung = (select
+        max(`table`.so_lan)
     from
-        hop_dong_chi_tiet hdct
-    group by hdct.ma_dich_vu_di_kem);
-
+        (select
+            sum(so_luong) as so_lan
+        from
+            hop_dong_chi_tiet
+        group by ma_dich_vu_di_kem) as `table`);
+    
 -- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất.
 -- -- -- Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
 
@@ -286,7 +289,6 @@ where
     year(hd.ngay_lam_hop_dong) between '2020' and '2021'
 group by hd.ma_nhan_vien
 having count(hd.ma_nhan_vien) <= 3;
-
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
 
