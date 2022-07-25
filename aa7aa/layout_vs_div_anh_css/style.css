@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+}
+#header{
+    background: aqua;
+    height: 100px;
+    width: 100%;
+}
+#main{
+    background: antiquewhite;
+    height: 400px;
+    width: 70%;
+    float: left;
+}
+#sidebar{
+    background: blueviolet;
+    height: 400px;
+    width: 30%;
+    float: left;
+}
+#footer{
+    background: chartreuse;
+    height: 100px;
+    width: 100%;
+    clear: both;
+}
