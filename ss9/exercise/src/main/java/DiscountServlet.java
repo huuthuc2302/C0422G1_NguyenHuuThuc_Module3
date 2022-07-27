@@ -17,8 +17,10 @@ public class DiscountServlet extends HttpServlet {
         float percent = Float.parseFloat(request.getParameter("PERCENT"));
 
         float amount = (float) (price * percent * 0.01);
+        float discount_price = price - amount;
         RequestDispatcher dispatcher = request.getRequestDispatcher("result.jsp");
-        request.setAttribute("amount",amount);
+        request.setAttribute("discount_amount",amount);
+        request.setAttribute("discount_price",discount_price);
         dispatcher.forward(request,response);
     }
 }

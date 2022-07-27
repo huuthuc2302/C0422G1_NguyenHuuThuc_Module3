@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<p>Kết quả Amount ${amount}</p>
+<p>Kết quả Discount Amount ${discount_amount}</p>
+<p>Kết quả Discount Price ${discount_price}</p>
 </body>
 </html>
