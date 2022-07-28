@@ -17,15 +17,13 @@ public class CalculatorServlet extends HttpServlet {
         float numberOne = Integer.parseInt(request.getParameter("first-operand"));
         float numberTwo = Integer.parseInt(request.getParameter("second-operand"));
         char operator = request.getParameter("operator").charAt(0);
-        PrintWriter writer = response.getWriter();
-        writer.println("<html>");
-        writer.println("<h1>Result:</h1>");
-        try{
-            float result = Calculator.calculate(numberOne, numberTwo, operator);
-            writer.println(numberOne + " " + operator + " " + numberTwo + " = " + result);
-        }catch (Exception ex){
-            writer.println("Error: " + ex.getMessage());
-        }
-        writer.println("</html>");
+        float result = Calculator.calculate(numberOne,numberTwo,operator);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("display.jsp");
+        request.setAttribute("numberOne", numberOne);
+        request.setAttribute("numberTwo", numberTwo);
+        request.setAttribute("operator", operator);
+        request.setAttribute("result",result);
+        requestDispatcher.forward(request,response);
     }
 }
