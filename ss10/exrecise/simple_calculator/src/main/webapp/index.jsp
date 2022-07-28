@@ -6,9 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Calculator</title>
   </head>
   <body>
   <h1>Simple Calculator</h1>
@@ -18,7 +19,7 @@
       <table>
         <tr>
           <td>First operand: </td>
-          <td><input name="numberOne" type="number"/></td>
+          <td><input name="numberOne" type="text"/></td>
         </tr>
         <tr>
           <td>Operator: </td>
@@ -33,7 +34,7 @@
         </tr>
         <tr>
           <td>Second operand: </td>
-          <td><input name="numberTwo" type="number"/></td>
+          <td><input name="numberTwo" type="text"/></td>
         </tr>
         <tr>
           <td></td>

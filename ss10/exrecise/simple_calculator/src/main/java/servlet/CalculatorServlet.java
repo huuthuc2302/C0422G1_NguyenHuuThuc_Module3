@@ -14,12 +14,12 @@ public class CalculatorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        float numberOne = Integer.parseInt(request.getParameter("first-operand"));
-        float numberTwo = Integer.parseInt(request.getParameter("second-operand"));
+        float numberOne = Float.parseFloat(request.getParameter("numberOne"));
+        float numberTwo = Float.parseFloat(request.getParameter("numberTwo"));
         char operator = request.getParameter("operator").charAt(0);
         float result = Calculator.calculate(numberOne,numberTwo,operator);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("display.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         request.setAttribute("numberOne", numberOne);
         request.setAttribute("numberTwo", numberTwo);
         request.setAttribute("operator", operator);

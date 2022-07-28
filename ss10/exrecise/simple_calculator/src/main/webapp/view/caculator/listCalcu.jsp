@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Calculator</title>
@@ -13,5 +14,6 @@
 <body>
     <h3>Result:</h3>
     <p>${numberOne} ${operator} ${numberTwo} = ${result}</p>
+
 </body>
 </html>
