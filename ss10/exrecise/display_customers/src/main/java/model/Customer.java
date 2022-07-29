@@ -2,18 +2,18 @@ package model;
 
 public class Customer {
     private String name;
-    private String birthday;
+    private String birthDay;
     private String address;
     private String photo;
 
     public Customer(){
     }
 
-    public Customer(String name, String birthday, String address, String photo) {
-            this.name = name;
-            this.birthday = birthday;
-            this.address = address;
-            this.photo = photo;
+    public Customer(String name, String birthDay, String address, String photo) {
+        this.name = name;
+        this.birthDay = birthDay;
+        this.address = address;
+        this.photo = photo;
     }
 
     public String getName() {
@@ -24,12 +24,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getBirthDay() {
+        return birthDay;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
     }
 
     public String getAddress() {

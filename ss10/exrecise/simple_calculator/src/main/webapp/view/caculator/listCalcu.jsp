@@ -12,6 +12,37 @@
     <title>Calculator</title>
 </head>
 <body>
+<h1>Simple Calculator</h1>
+<form method="post" action="/calculator">
+    <fieldset>
+        <legend>Calculator</legend>
+        <table>
+            <tr>
+                <td>First operand: </td>
+                <td><input name="numberOne" type="number"/></td>
+            </tr>
+            <tr>
+                <td>Operator: </td>
+                <td>
+                    <select name="operator">
+                        <option value="+">Addition</option>
+                        <option value="-">Subtraction</option>
+                        <option value="*">Multiplication</option>
+                        <option value="/">Division</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Second operand: </td>
+                <td><input name="numberTwo" type="number"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Calculate"/></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
     <h3>Result:</h3>
     <p>${numberOne} ${operator} ${numberTwo} = ${result}</p>
 

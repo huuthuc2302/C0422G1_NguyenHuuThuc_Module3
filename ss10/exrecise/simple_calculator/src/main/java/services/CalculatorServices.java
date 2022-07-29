@@ -1,7 +1,9 @@
-package model;
+package services;
 
-public class Calculator {
-    public static float calculate(float numberOne, float numberTwo, char operator ){
+import unit.CalculatorException;
+
+public class CalculatorServices {
+    public static float calculate(float numberOne, float numberTwo, char operator ) throws CalculatorException {
         switch (operator){
             case '+':
                 return numberOne + numberTwo;
@@ -13,7 +15,7 @@ public class Calculator {
                 if(numberTwo != 0)
                     return numberOne / numberTwo;
                 else
-                    throw new RuntimeException("Không thể chia cho 0");
+                    throw new CalculatorException("Không thể chia cho 0");
             default:
                 throw new RuntimeException("Không hợp lệ");
         }

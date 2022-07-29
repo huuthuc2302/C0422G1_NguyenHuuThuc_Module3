@@ -43,10 +43,10 @@
     </tr>
 <c:forEach var="customer" items="${customerList}">
     <tr>
-        <td>${customer.getName()}</td>
-        <td>${customer.getBirthday()}</td>
-        <td>${customer.getAddress()}</td>
-        <td><img src="${customer.getPhoto()}" alt=""></td>
+        <td>${customer.name}</td>
+        <td>${customer.birthDay}</td>
+        <td>${customer.address}</td>
+        <td><img src="${customer.photo}" alt=""></td>
     </tr>
 </c:forEach>
 </table>

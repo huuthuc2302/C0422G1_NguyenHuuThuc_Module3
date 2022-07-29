@@ -18,11 +18,11 @@ public class CustomerServlet extends HttpServlet {
     @Override
     public void init() throws ServletException{
 
-        customerList.add(new Customer("Mai Văn Hoàn", "1983-08-20", "Hà Nội","img/dương thuỳ.jpg" ));
-        customerList.add(new Customer("Nguyễn Văn Nam", "1983-08-21", "Bắc Giang","img/hằng1.jpg"));
-        customerList.add(new Customer("Nguyễn Thái Hoà", "1983-08-22", "Nam Định","img/lan chiên.jpg"));
-        customerList.add(new Customer("Trần Đăng Khoa", "1983-08-17", "Hà Tây","img/phương dung.jpg"));
-        customerList.add(new Customer("Nguyễn Đình Thi", "1983-08-19", "Hà Nội","img/thuý.jpg"));
+        customerList.add(new Customer("Mai Văn Hoàn", "1983-08-20", "Hà Nội","img/duong.jpg" ));
+        customerList.add(new Customer("Nguyễn Văn Nam", "1983-08-21", "Bắc Giang","img/hang.jpg"));
+        customerList.add(new Customer("Nguyễn Thái Hoà", "1983-08-22", "Nam Định","img/lan.jpg"));
+        customerList.add(new Customer("Trần Đăng Khoa", "1983-08-17", "Hà Tây","img/dung.jpg"));
+        customerList.add(new Customer("Nguyễn Đình Thi", "1983-08-19", "Hà Nội","img/thuy.jpg"));
 
     }
 
