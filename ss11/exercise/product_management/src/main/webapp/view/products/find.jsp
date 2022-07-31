@@ -31,7 +31,7 @@
         <th>Mô Tả Sản Phẩm</th>
         <th>Nhà Sản Xuất</th>
     </tr>
-    <c:forEach var="products" items="${productsList}" varStatus="status">
+    <c:forEach var="product" items="${productsList}" varStatus="status">
         <tr>
             <td>${product.id}</td>
             <td>${product.name}</td>
