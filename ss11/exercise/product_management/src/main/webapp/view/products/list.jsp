@@ -12,9 +12,13 @@
     <title>Products List</title>
 </head>
 <body>
-<div class = "Title">
+<a href="/products?action=create">Thêm mới sản phẩm</a>
+<div class="Title">
+    <form action="/products?action=find" method="post">
+        <input type="text" placeholder="Nhập tên sản phẩm" name="name">
+        <button>Tìm</button>
+    </form>
     <h1>Danh Sách Sản Phẩm</h1>
-    <p><a class = "find" href="/products?action=find">Find By Name</a></p>
 </div>
 <table border="1">
     <tr>
@@ -23,7 +27,6 @@
         <th>Giá Sản Phẩm</th>
         <th>Mô Tả Của Sản phẩm</th>
         <th>Nhà Sản Xuất</th>
-        <th>Create</th>
         <th>Edit</th>
         <th>Delete</th>
         <th>View</th>
@@ -35,7 +38,6 @@
             <td>${product.price}</td>
             <td>${product.description}</td>
             <td>${product.manufacturer}</td>
-            <td><a href="/products?action=create&id=${product.id}">create</a></td>
             <td><a href="/products?action=update&id=${product.id}">edit</a></td>
             <td><a href="/products?action=delete&id=${product.id}">delete</a></td>
             <td><a href="/products?action=view&id=${product.id}">view</a></td>

@@ -35,14 +35,8 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void view(Products product) {
-        productRepository.view(product);
-
-    }
-
-    @Override
     public List<Products> findByName(String name) {
-        return (List<Products>) productRepository.findByName(name);
+        return productRepository.findByName(name);
     }
 
     @Override

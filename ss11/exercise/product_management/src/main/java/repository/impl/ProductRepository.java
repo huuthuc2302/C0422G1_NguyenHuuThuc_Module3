@@ -11,12 +11,12 @@ public class ProductRepository implements IProductRepository {
     private static List<Products> productsList = new ArrayList<>();
 
     static {
-        productsList.add(1, new Products(1, "iPhone 13 Pro Max", 27000000, "Mới chính hãng", "Apple"));
-        productsList.add(2, new Products(2, "Xiaomi Mi Mix 3", 18000000, "Mới nhập khẩu", "Xiaomi"));
-        productsList.add(3, new Products(3, "Samsung Note 22 Ultra", 20000000, "Mới chính hãng", "Samsung"));
-        productsList.add(4, new Products(4, "iPhone 12 Mini", 15000000, "Mới chính hãng", "Apple"));
-        productsList.add(5, new Products(5, "Xiaomi Mi 11 Pro", 18000000, "Mới nhập khẩu", "Xiaomi"));
-        productsList.add(6, new Products(6, "Samsung Note 20", 14000000, "Qua sử dụng", "Samsung"));
+        productsList.add(new Products(1, "iPhone 13 Pro Max", 27000000, "Mới chính hãng", "Apple"));
+        productsList.add(new Products(2, "Xiaomi Mi Mix 3", 18000000, "Mới nhập khẩu", "Xiaomi"));
+        productsList.add(new Products(3, "Samsung Note 22 Ultra", 20000000, "Mới chính hãng", "Samsung"));
+        productsList.add(new Products(4, "iPhone 12 Mini", 15000000, "Mới chính hãng", "Apple"));
+        productsList.add(new Products(5, "Xiaomi Mi 11 Pro", 18000000, "Mới nhập khẩu", "Xiaomi"));
+        productsList.add(new Products(6, "Samsung Note 20", 14000000, "Qua sử dụng", "Samsung"));
     }
 
     @Override
@@ -31,13 +31,9 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public void update(int id, Products product) {
-        for (Products p:productsList){
-            if(product.getId() == p.getId()){
-                p.setName(product.getName());
-                p.setPrice(product.getPrice());
-                p.setDescription(product.getDescription());
-                p.setManufacturer(product.getManufacturer());
-                break;
+        for (int i = 0; i < productsList.size(); i++) {
+            if(productsList.get(i).getId()==id) {
+                productsList.set(i, product);
             }
         }
 
@@ -45,19 +41,18 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public void delete(int id) {
-        productsList.remove(findById(id));
-    }
-
-    @Override
-    public void view(Products product) {
-
+        for (int i = 0; i < productsList.size(); i++) {
+            if(productsList.get(i).getId()==id) {
+                productsList.remove(i);
+            }
+        }
     }
 
     @Override
     public List<Products> findByName(String name) {
         List<Products> productList1 = new ArrayList<>();
         for (Products p : productsList) {
-            if (p.getName().equals(name)) {
+            if (p.getName().toLowerCase().contains(name.toLowerCase())) {
                 productList1.add(p);
             }
         }
@@ -73,7 +68,6 @@ public class ProductRepository implements IProductRepository {
                 break;
             }
         }
-
         return product;
     }
 }

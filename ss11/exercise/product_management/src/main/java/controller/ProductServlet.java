@@ -22,12 +22,12 @@ public class ProductServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
-        if (action==null){
-            action ="";
+        if (action == null) {
+            action = "";
         }
-        switch (action){
+        switch (action) {
             case "create":
-                showCreateProduct(request,response);
+                showCreateProduct(request, response);
                 break;
             case "update":
                 showUpdateProduct(request, response);
@@ -38,41 +38,19 @@ public class ProductServlet extends HttpServlet {
             case "view":
                 viewProduct(request, response);
                 break;
-            case "find":
-                searchByName(request, response);
-                break;
             default:
-                showListProduct(request,response);
+                showListProduct(request, response);
                 break;
         }
 
     }
 
-    private void searchByName(HttpServletRequest request, HttpServletResponse response) {
-        String name = request.getParameter("name");
-        List<Products> productsList = productService.findByName(name);
-        RequestDispatcher dispatcher;
-        if(productsList == null){
-            dispatcher = request.getRequestDispatcher("view/error-404.jsp");
-        } else {
-            request.setAttribute("productsList", productsList);
-            dispatcher = request.getRequestDispatcher("view/products/find.jsp");
-        }
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void viewProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Products product = productService.findById(id);
         RequestDispatcher dispatcher;
-        if(product == null){
+        if (product == null) {
             dispatcher = request.getRequestDispatcher("view/error-404.jsp");
         } else {
             request.setAttribute("product", product);
@@ -91,7 +69,7 @@ public class ProductServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Products product = productService.findById(id);
         RequestDispatcher dispatcher;
-        if(product == null){
+        if (product == null) {
             dispatcher = request.getRequestDispatcher("view/error-404.jsp");
         } else {
             request.setAttribute("product", product);
@@ -110,7 +88,7 @@ public class ProductServlet extends HttpServlet {
     private void showUpdateProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/products/edit.jsp");
-        request.setAttribute("id",id);
+        request.setAttribute("id", id);
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -123,7 +101,7 @@ public class ProductServlet extends HttpServlet {
     private void showCreateProduct(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/products/create.jsp");
         try {
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -135,9 +113,9 @@ public class ProductServlet extends HttpServlet {
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) {
         List<Products> productsList = productService.findAll();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/products/list.jsp");
-        request.setAttribute("productsList",productsList);
+        request.setAttribute("productsList", productsList);
         try {
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -154,10 +132,10 @@ public class ProductServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
-        if (action==null){
-            action ="";
+        if (action == null) {
+            action = "";
         }
-        switch (action){
+        switch (action) {
             case "create":
                 createProduct(request, response);
                 break;
@@ -168,7 +146,7 @@ public class ProductServlet extends HttpServlet {
                 deleteProduct(request, response);
                 break;
             case "find":
-                findNameProduct(request,response);
+                findNameProduct(request, response);
                 break;
             default:
                 break;
@@ -179,10 +157,10 @@ public class ProductServlet extends HttpServlet {
     private void findNameProduct(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         List<Products> productsList = productService.findByName(name);
-        RequestDispatcher requestDispatcher= request.getRequestDispatcher("view/products/find.jsp");
-        request.setAttribute("productsList",productsList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/products/list.jsp");
+        request.setAttribute("productsList", productsList);
         try {
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -193,17 +171,11 @@ public class ProductServlet extends HttpServlet {
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        Products product = this.productService.findById(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/products/delete.jsp");
-        if(product == null){
-            dispatcher = request.getRequestDispatcher("view/error-404.jsp");
-        } else {
-            this.productService.delete(id);
-            try {
-                response.sendRedirect("product");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        this.productService.delete(id);
+        try {
+            response.sendRedirect("/products");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -215,7 +187,7 @@ public class ProductServlet extends HttpServlet {
         String manufacturer = request.getParameter("manufacturer");
 
         Products product = new Products(id, name, price, description, manufacturer);
-        productService.update(product.getId(),product);
+        productService.update(product.getId(), product);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/products/edit.jsp");
         request.setAttribute("message", "Cập nhật sản phẩm thành công");
         showUpdateProduct(request, response);
@@ -235,11 +207,11 @@ public class ProductServlet extends HttpServlet {
         String description = request.getParameter("description");
         String manufacturer = request.getParameter("manufacturer");
 
-        Products product = new Products(id,name,price,description,manufacturer);
+        Products product = new Products(id, name, price, description, manufacturer);
         productService.create(product);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/products/create.jsp");
         request.setAttribute("message", "Thêm sản phẩm mới thành công");
-        showCreateProduct(request,response);
+        showCreateProduct(request, response);
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
