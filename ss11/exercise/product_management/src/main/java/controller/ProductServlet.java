@@ -1,8 +1,8 @@
-package com.codegym.controller;
+package controller;
 
-import com.codegym.model.Products;
-import com.codegym.service.IProductService;
-import com.codegym.service.impl.ProductService;
+import model.Products;
+import service.IProductService;
+import service.impl.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

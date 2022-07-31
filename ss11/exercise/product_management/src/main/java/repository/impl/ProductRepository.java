@@ -1,7 +1,7 @@
-package com.codegym.repository.impl;
+package repository.impl;
 
-import com.codegym.model.Products;
-import com.codegym.repository.IProductRepository;
+import model.Products;
+import repository.IProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;

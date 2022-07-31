@@ -1,9 +1,9 @@
-package com.codegym.service.impl;
+package service.impl;
 
-import com.codegym.model.Products;
-import com.codegym.repository.IProductRepository;
-import com.codegym.repository.impl.ProductRepository;
-import com.codegym.service.IProductService;
+import model.Products;
+import repository.IProductRepository;
+import repository.impl.ProductRepository;
+import service.IProductService;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.codegym.repository;
+package repository;
 
-import com.codegym.model.Products;
+import model.Products;
 
 import java.util.List;
 
