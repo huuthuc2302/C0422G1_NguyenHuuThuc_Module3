@@ -41,4 +41,9 @@ public class UserService implements IUserService {
     public List<User> findCountry(String country) throws SQLException {
         return userRepository.findCountry(country);
     }
+
+    @Override
+    public List<User> sortByName() throws SQLException {
+        return userRepository.sortByName();
+    }
 }

@@ -16,6 +16,7 @@ public class UserRepository implements IUserRepository {
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
     private static final String SELECT_BY_COUNTRY = "select * from users where country like ?;";
+    private static final String SORT_BY_NAME = "SELECT * FROM users ORDER BY users.name;";
     BaseRepository baseRepository = new BaseRepository();
 
     public UserRepository() {
@@ -143,6 +144,24 @@ public class UserRepository implements IUserRepository {
             printSQLException(e);
         }
 
-        return null;
+        return userList;
+    }
+
+    @Override
+    public List<User> sortByName() throws SQLException {
+        List<User> userList = new ArrayList<>();
+        try (Connection connection = baseRepository.getConnectDB(); PreparedStatement statement = connection.prepareStatement(SORT_BY_NAME);){
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                userList.add(new User(id, name, email, country));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
     }
 }

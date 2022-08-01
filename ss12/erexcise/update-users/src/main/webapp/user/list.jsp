@@ -17,6 +17,9 @@
     <h2>
         <a href="/users?action=create">Thêm người dùng mới</a>
     </h2>
+    <h2>
+        <a href="/users?action=sort">Sắp xếp</a>
+    </h2>
     <form action="/users?action=find" method="post">
         <input type="text" name="country" placeholder="Quốc gia cần tìm">
         <button name="action" type="submit">Tìm</button>
