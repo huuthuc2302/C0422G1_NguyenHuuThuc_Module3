@@ -13,7 +13,7 @@
 </head>
 <body>
 <center>
-    <h1>Quản lý người dùng</h1>
+    <h1>QUẢN LÝ NGƯỜI DÙNG</h1>
     <h2>
         <a href="/users?action=create">Thêm người dùng mới</a>
     </h2>
@@ -30,10 +30,10 @@
         <caption><h2>Danh sách người dùng</h2></caption>
         <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Tên</th>
             <th>Email</th>
-            <th>Country</th>
-            <th>Actions</th>
+            <th>Quốc Gia</th>
+            <th>Chức năng</th>
         </tr>
         <c:forEach var="user" items="${listUser}">
             <tr>
@@ -42,8 +42,8 @@
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.country}"/></td>
                 <td>
-                    <a href="/users?action=edit&id=${user.id}">Edit</a>
-                    <a href="/users?action=delete&id=${user.id}">Delete</a>
+                    <a href="/users?action=edit&id=${user.id}">Sửa</a>
+                    <a href="/users?action=delete&id=${user.id}">Xoá</a>
                 </td>
             </tr>
         </c:forEach>
