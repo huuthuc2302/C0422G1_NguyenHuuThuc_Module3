@@ -52,13 +52,6 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void sortByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
-        List<User> listUser =userService.sortByName();
-        request.setAttribute("listUser",listUser);
-        requestDispatcher.forward(request,response);
-    }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,6 +78,14 @@ public class UserServlet extends HttpServlet {
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
+    }
+
+
+    private void sortByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
+        List<User> listUser =userService.sortByName();
+        request.setAttribute("listUser",listUser);
+        requestDispatcher.forward(request,response);
     }
 
     private void findCountry(HttpServletRequest request, HttpServletResponse response) throws SQLException {

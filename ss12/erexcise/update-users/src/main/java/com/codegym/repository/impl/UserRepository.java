@@ -17,7 +17,6 @@ public class UserRepository implements IUserRepository {
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
     private static final String SELECT_BY_COUNTRY = "select * from users where country like ?;";
     private static final String SORT_BY_NAME = "SELECT * FROM users ORDER BY users.name;";
-    BaseRepository baseRepository = new BaseRepository();
 
     public UserRepository() {
     }
@@ -25,9 +24,10 @@ public class UserRepository implements IUserRepository {
     @Override
     public void insertUser(User user) throws SQLException {
 
+        Connection connection = BaseRepository.getConnectDB();
 
-        try (Connection connection = baseRepository.getConnectDB();
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL);){
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getCountry());
@@ -38,27 +38,16 @@ public class UserRepository implements IUserRepository {
         }
     }
 
-    private void printSQLException(SQLException ex) {
-        for (Throwable e : ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
-        }
-    }
+
 
     @Override
     public User selectUser(int id) {
         User user = null;
-        try (Connection connection = baseRepository.getConnectDB();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+
+        Connection connection = BaseRepository.getConnectDB();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -77,11 +66,12 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> selectAllUsers() {
-
         List<User> userList = new ArrayList<>();
 
-        try (Connection connection =  baseRepository.getConnectDB();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
+        Connection connection = BaseRepository.getConnectDB();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -100,24 +90,36 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public boolean deleteUser(int id) throws SQLException {
-        boolean rowDeleted;
-        try (Connection connection =  baseRepository.getConnectDB(); PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
+        boolean rowDeleted = false;
+
+        Connection connection = BaseRepository.getConnectDB();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);
             statement.setInt(1, id);
             rowDeleted = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return rowDeleted;
     }
 
     @Override
     public boolean updateUser(User user) throws SQLException {
-        boolean rowUpdated;
-        try (Connection connection =  baseRepository.getConnectDB(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+        boolean rowUpdated = false;
+
+        Connection connection = BaseRepository.getConnectDB();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getCountry());
             statement.setInt(4, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return rowUpdated;
     }
@@ -126,33 +128,36 @@ public class UserRepository implements IUserRepository {
     public List<User> findCountry(String country) throws SQLException {
         List<User> userList = new ArrayList<>();
 
-        try(Connection connection = baseRepository.getConnectDB();
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_COUNTRY);) {
+        Connection connection = BaseRepository.getConnectDB();
 
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_COUNTRY);
             preparedStatement.setString(1, country);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
-                User user = new User(id, name, email,country);
+                User user = new User(id, name, email, country);
                 userList.add(user);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             printSQLException(e);
         }
-
         return userList;
     }
 
     @Override
     public List<User> sortByName() throws SQLException {
         List<User> userList = new ArrayList<>();
-        try (Connection connection = baseRepository.getConnectDB(); PreparedStatement statement = connection.prepareStatement(SORT_BY_NAME);){
+
+        Connection connection = BaseRepository.getConnectDB();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(SORT_BY_NAME);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
@@ -164,4 +169,22 @@ public class UserRepository implements IUserRepository {
         }
         return userList;
     }
+
+    private void printSQLException(SQLException ex) {
+        for (Throwable e : ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
+
+
 }

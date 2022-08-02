@@ -15,8 +15,8 @@ public class BaseRepository {
             connection= DriverManager.getConnection(URL,USER,PASS);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return connection;
     }

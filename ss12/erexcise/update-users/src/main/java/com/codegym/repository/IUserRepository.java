@@ -18,5 +18,5 @@ public interface IUserRepository {
 
     public List<User> findCountry(String country) throws SQLException;
 
-    public  List<User> sortByName() throws SQLException;
+    public List<User> sortByName() throws SQLException;
 }
