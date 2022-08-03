@@ -46,6 +46,37 @@ public class ProductServlet extends HttpServlet {
     }
 
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                createProduct(request, response);
+                break;
+            case "update":
+                updateProduct(request, response);
+                break;
+            case "delete":
+                deleteProduct(request, response);
+                break;
+            case "find":
+                findNameProduct(request, response);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
+
     private void viewProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Products product = productService.findById(id);
@@ -95,6 +126,7 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 
@@ -125,34 +157,7 @@ public class ProductServlet extends HttpServlet {
     }
 
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "create":
-                createProduct(request, response);
-                break;
-            case "update":
-                updateProduct(request, response);
-                break;
-            case "delete":
-                deleteProduct(request, response);
-                break;
-            case "find":
-                findNameProduct(request, response);
-                break;
-            default:
-                break;
-        }
-
-    }
 
     private void findNameProduct(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");

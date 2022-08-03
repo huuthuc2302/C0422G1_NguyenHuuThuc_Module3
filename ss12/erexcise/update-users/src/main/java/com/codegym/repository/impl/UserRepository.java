@@ -170,6 +170,8 @@ public class UserRepository implements IUserRepository {
         return userList;
     }
 
+
+
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {
             if (e instanceof SQLException) {
@@ -185,6 +187,5 @@ public class UserRepository implements IUserRepository {
             }
         }
     }
-
 
 }

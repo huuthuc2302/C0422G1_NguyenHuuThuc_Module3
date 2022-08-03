@@ -100,7 +100,7 @@ select
     stu.*, avg(m.Mark) as diem_trung_binh
 from
     Student stu
-        join
+       left join
     Mark m on stu.StudentID = m.StudentID
 group by stu.StudentID 
 order by diem_trung_binh desc;

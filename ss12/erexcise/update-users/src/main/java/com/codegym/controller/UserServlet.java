@@ -143,6 +143,9 @@ public class UserServlet extends HttpServlet {
         User book = new User(id, name, email, country);
         userService.updateUser(book);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/edit.jsp");
+
+        request.setAttribute("message", "Cập nhật thành công");
+
         dispatcher.forward(request, response);
     }
 
@@ -153,7 +156,9 @@ public class UserServlet extends HttpServlet {
         User newUser = new User(name, email, country);
         userService.insertUser(newUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/create.jsp");
+
         request.setAttribute("message", "Thêm mới thanh công");
+
         dispatcher.forward(request, response);
     }
 }

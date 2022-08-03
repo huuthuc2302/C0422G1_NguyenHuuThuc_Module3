@@ -14,6 +14,9 @@
         h3{
             color: red;
         }
+        a{
+            text-decoration: none
+        }
     </style>
 </head>
 <body>
