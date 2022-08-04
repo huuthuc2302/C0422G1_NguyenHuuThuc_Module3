@@ -10,17 +10,43 @@
 <html>
 <head>
     <title>User Management Application</title>
-
-    <link rel="stylesheet" href="common/bootstrap-5.0.2-dist/css/bootstrap.css">
+    <style>
+        a{
+            text-decoration: none
+        }
+        table {
+            border: thick;
+            width: 80%;
+            text-align: center;
+            background-color: wheat;
+            font-family: ui-serif;
+        }
+        a.button {
+            padding: 3px 11px;
+            background: #46ff00;
+            border-radius: 12px;
+            border: solid black;
+        }
+        a.add1{
+            background: chartreuse;
+            padding: 8px;
+            border-radius: 17px;
+        }
+        a.sort1{
+            background: yellow;
+            padding: 8px;
+            border-radius: 17px;
+        }
+    </style>
 </head>
 <body>
 <center>
     <h1>QUẢN LÝ NGƯỜI DÙNG</h1>
     <h2>
-        <a class="btn btn-outline-primary" href="/users?action=create">Thêm người dùng mới</a>
+        <a class="add1" href="/users?action=create">Thêm người dùng mới</a>
     </h2>
     <h2>
-        <a class="btn btn-outline-warning" href="/users?action=sort">Sắp xếp</a>
+        <a class="sort1" href="/users?action=sort">Sắp xếp</a>
     </h2>
     <form action="/users?action=find" method="post">
         <input type="text" name="country" placeholder="Quốc gia cần tìm">
@@ -28,31 +54,27 @@
     </form>
 </center>
 <div align="center">
-    <caption><h2>Danh sách người dùng</h2></caption>
-    <div class = "container">
-        <table class="table table-success table-striped" border="1" cellpadding="5">
-
+    <table border="1" cellpadding="5">
+        <caption><h2>Danh sách người dùng</h2></caption>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Quốc Gia</th>
+            <th>Sửa</th>
+            <th>Xoá</th>
+        </tr>
+        <c:forEach var="user" items="${listUser}">
             <tr>
-                <th>ID</th>
-                <th>Tên</th>
-                <th>Email</th>
-                <th>Quốc Gia</th>
-                <th>Sửa</th>
-                <th>Xoá</th>
+                <td><c:out value="${user.id}"/></td>
+                <td><c:out value="${user.name}"/></td>
+                <td><c:out value="${user.email}"/></td>
+                <td><c:out value="${user.country}"/></td>
+                <td><a class="button" href="/users?action=edit&id=${user.id}">Sửa</a></td>
+                <td><a class="button" href="/users?action=delete&id=${user.id}">Xoá</a></td>
             </tr>
-            <c:forEach var="user" items="${listUser}">
-                <tr>
-                    <td><c:out value="${user.id}"/></td>
-                    <td><c:out value="${user.name}"/></td>
-                    <td><c:out value="${user.email}"/></td>
-                    <td><c:out value="${user.country}"/></td>
-                    <td><a class="btn btn-primary" href="/users?action=edit&id=${user.id}">Sửa</a></td>
-                    <td><a class="btn btn-danger" href="/users?action=delete&id=${user.id}">Xoá</a></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
+        </c:forEach>
+    </table>
 </div>
-<script href="common/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
 </body>
 </html>

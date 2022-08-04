@@ -132,7 +132,7 @@ public class UserRepository implements IUserRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_COUNTRY);
-            preparedStatement.setString(1, country);
+            preparedStatement.setString(1, "%"+ country +"%");
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
