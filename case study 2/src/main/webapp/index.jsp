@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="common/bootstrap-5.0.2-dist/css/bootstrap.css">
 </head>
 <body>
@@ -96,10 +96,12 @@
 
 
 
-    <footer class="bg-light text-center text-lg-start">
+    <footer class="bg-success text-center text-lg-start">
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2018 Furama Resort Danang.
+            <a class="nav-link font-weight-bold text-white">
+                © 2018 Furama Resort Danang.
+            </a>
         </div>
         <!-- Copyright -->
     </footer>
