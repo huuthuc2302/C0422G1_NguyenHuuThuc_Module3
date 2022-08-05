@@ -40,7 +40,7 @@
                     <a class="nav-link font-weight-bold text-white " href="#">Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold text-white" href="#">Service</a>
+                    <a class="nav-link font-weight-bold text-white" href="view/facility/list.jsp">Facility</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold text-white" href="#">Contract</a>
@@ -54,7 +54,7 @@
     </div>
 </nav>
 
-<div class="container-fluid  ">
+<div class="container-fluid">
 
     <div class="row">
 
