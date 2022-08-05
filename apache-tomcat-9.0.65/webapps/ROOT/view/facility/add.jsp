@@ -12,16 +12,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="https://furamavietnam.com/wp-content/uploads/2018/08/logo@2x.png" alt="" width="60" height="80">
-            </a>
-            <span>Nguyễn Hữu Thức</span>
-        </div>
-    </nav>
 
-    <div class="container w-50 mt-2 p-2 bg-success" style="border: 1px solid grey; border-radius: 15px">
+<%@include file="/include/header.jsp"%>
+
+<div class="container w-50 mt-5 p-2 bg-success" style="border: 1px solid grey; border-radius: 15px">
         <h3 align="center">THÊM MỚI DỊCH VỤ</h3>
         <form class="row g-3 text-center" action="" method="post">
             <div class="col-md-12">
@@ -130,6 +124,8 @@
             }
         }
     </script>
+
+<%@include file="/include/footer.jsp"%>
 
 </body>
 </html>

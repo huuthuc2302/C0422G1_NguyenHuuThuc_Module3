@@ -13,15 +13,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="https://furamavietnam.com/wp-content/uploads/2018/08/logo@2x.png" alt="" width="60" height="80">
-            </a>
-            <span>Nguyễn Hữu Thức</span>
-        </div>
-    </nav>
-
+<%@include file="/include/header.jsp"%>
 
     <center>
         <h1>QUẢN LÝ DỊCH VỤ</h1>
@@ -120,5 +112,8 @@
         </table>
         </div>
     </div>
+
+<%@include file="/include/footer.jsp"%>
+
 </body>
 </html>
