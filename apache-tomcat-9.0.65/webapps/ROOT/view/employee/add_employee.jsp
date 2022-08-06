@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-12">
                     <label for="customer_type_id" class="form-label">Trình độ</label>
-                    <select name=""  class="form-select" id="custoe_id">
+                    <select name=""  class="form-select" id="customer_id">
                         <option value="None">Chọn trình độ</option>
                         <option value="td1">Trung cấp</option>
                         <option value="td2">Cao đẳng</option>
