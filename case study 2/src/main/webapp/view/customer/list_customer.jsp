@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -6,23 +7,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>DANH SÁCH KHÁCH HÀNG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
 <%@include file="/include/header.jsp"%>
-
     <center>
         <h1>DANH SÁCH KHÁCH HÀNG</h1>
         <h3>
-            <a class="btn btn-outline-primary" href="add_customer.jsp">Thêm mới khách hàng</a>
+            <a class="btn btn-outline-primary" href="/customers?action=create&id=${customer.customerId}">Thêm mới khách hàng</a>
         </h3>
     </center>
-
-
     <div class="container ">
         <div class="row">
             <table class="table table-striped">
@@ -38,70 +36,57 @@
                     <th>Địa chỉ</th>
                     <th colspan="2">Chức năng</th>
                 </tr>
+                <c:forEach var="customer" items="${customerList}">
                 <tr>
-                    <td>1</td>
-                    <td>Member</td>
-                    <td>Nguyễn Thị Hào</td>
-                    <td>1970-11-07</td>
-                    <td>Nữ</td>
-                    <td>643431213</td>
-                    <td>0945423362</td>
-                    <td>thihao07@gmail.com</td>
-                    <td>23 Nguyễn Hoàng, Đà Nẵng</td>
+                    <td>${customer.customerId}</td>
+                    <td>${customer.customerTypeId}</td>
+                    <td>${customer.customerName}</td>
+                    <td>${customer.customerBirth}</td>
+                    <td>${customer.customerGender}</td>
+                    <td>${customer.customerIdCard}</td>
+                    <td>${customer.customerPhone}</td>
+                    <td>${customer.customerEmail}</td>
+                    <td>${customer.customerAddress}</td>
                     <td>
-                        <a type="button" class="btn btn-primary" href="edit_customer.jsp" onclick="">
+                        <a type="button" class="btn btn-primary" href="/customers?action=update&id=${customer.customerId}">
                             Sửa
                         </a></td>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" onclick="">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showInfoDelete('${customer.customerId}','${customer.customerName}')">
                             Xóa
                         </button>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Gold</td>
-                    <td>Phạm Xuân Diệu</td>
-                    <td>1992-08-08</td>
-                    <td>Nữ</td>
-                    <td>865342123</td>
-                    <td>0954333333</td>
-                    <td>xuandieu92@gmail.com</td>
-                    <td>K77/22 Thái Phiên, Quảng Trị</td>
-                    <td>
-                        <a type="button" class="btn btn-primary" href="edit_customer.jsp" onclick="">
-                            Sửa
-                        </a></td>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger" onclick="">
-                            Xóa
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Diamond</td>
-                    <td>Trương Đình Nghệ</td>
-                    <td>1990-02-27</td>
-                    <td>Nam</td>
-                    <td>488645199</td>
-                    <td>0373213122</td>
-                    <td>nghenhan2702@gmail.com</td>
-                    <td>K323/12 Ông Ích Khiêm, Vinh</td>
-                    <td>
-                        <a type="button" class="btn btn-primary" href="edit_customer.jsp" onclick="">
-                            Sửa
-                        </a>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger" onclick="">
-                            Xóa
-                        </button>
-                    </td>
-                </tr>
+                </c:forEach>
             </table>
+
+            <form action="/customers?action=delete" method="post">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input hidden type="text" name="customerId" id="deleteId">
+                                <span>Bạn có muốn xóa : </span><span id="deleteName"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ĐÓNG</button>
+                                <button type="submit" class="btn btn-primary">XOÁ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <script>
+                function showInfoDelete(id,name) {
+                    document.getElementById("deleteId").value= id;
+                    document.getElementById("deleteName").innerText=name;
+                }
+            </script>
         </div>
     </div>
 

@@ -110,3 +110,5 @@ create table hop_dong_chi_tiet(
     foreign key (ma_hop_dong) references hop_dong(ma_hop_dong),
     foreign key (ma_dich_vu_di_kem) references dich_vu_di_kem(ma_dich_vu_di_kem)
 );
+
+select * from khach_hang;

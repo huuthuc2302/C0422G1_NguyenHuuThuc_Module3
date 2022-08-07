@@ -17,9 +17,7 @@
 <div class="container-fluid">
 
     <div class="row">
-
         <img src="img/carousel_image_1.png " style="height: 100vh; width: 100%" alt="">
-
     </div>
 
     <div class="card mb-3 ">

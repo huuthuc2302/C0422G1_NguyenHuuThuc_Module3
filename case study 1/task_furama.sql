@@ -244,7 +244,26 @@ having so_lan_su_dung = (select
         from
             hop_dong_chi_tiet
         group by ma_dich_vu_di_kem) as `table`);
-    
+
+-- C2 --
+
+SELECT
+    dvdk.ma_dich_vu_di_kem,
+    ten_dich_vu_di_kem,
+    SUM(hdct.so_luong) AS so_luong_dich_vu_di_kem
+FROM
+    dich_vu_di_kem dvdk
+        JOIN
+    hop_dong_chi_tiet hdct ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem
+GROUP BY dvdk.ma_dich_vu_di_kem
+HAVING so_luong_dich_vu_di_kem = (SELECT
+        SUM(so_luong)
+    FROM
+        hop_dong_chi_tiet
+    GROUP BY ma_dich_vu_di_kem
+    ORDER BY SUM(so_luong) DESC
+    LIMIT 1);
+     
 -- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất.
 -- -- -- Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
 
@@ -267,8 +286,9 @@ group by hdct.ma_dich_vu_di_kem
 having count(hdct.ma_dich_vu_di_kem) = 1
 order by hd.ma_hop_dong;
 
--- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten,
--- -- --  ten_trinh_do, ten_bo_phan, so_dien_thoai, dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten,-- 
+-- -- --  ten_trinh_do, ten_bo_phan, so_dien_thoai,-- 
+-- -- --  dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.-- 
 
 select 
     nv.ma_nhan_vien,

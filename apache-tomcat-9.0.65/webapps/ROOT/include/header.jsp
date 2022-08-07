@@ -32,13 +32,13 @@
                     <a class="nav-link  font-weight-bold text-white" href="view/employee/list_employee.jsp">Employee</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold text-white " href="view/customer/list_customer.jsp">Customer</a>
+                    <a class="nav-link font-weight-bold text-white " href="/customers?action=default">Customer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold text-white" href="view/facility/list.jsp">Facility</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold text-white" href="#">Contract</a>
+                    <a class="nav-link font-weight-bold text-white" href="view/contract/list_contract.jsp">Contract</a>
                 </li>
             </ul>
             <form class="d-flex">

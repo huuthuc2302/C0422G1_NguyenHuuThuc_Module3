@@ -4,7 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee3ee133-ca67-4ae5-b97a-a2ae282544fc" name="Changes" comment="" />
+    <list default="true" id="ee3ee133-ca67-4ae5-b97a-a2ae282544fc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/case.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/customer/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/customer/CustomerType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/BaseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/customer/ICustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/customer/ICustomerTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/customer/impl/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/customer/impl/CustomerTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/customer/ICustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/customer/ICustomerTypeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/customer/impl/CustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/customer/impl/CustomerTypeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/WEB-INF/classes/controller/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/WEB-INF/classes/controller/CustomerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/WEB-INF/lib/mysql-connector-java-8.0.23.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/include/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/include/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/view/customer/add_customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/view/customer/add_customer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/view/customer/edit_customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/view/customer/edit_customer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/view/customer/list_customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../apache-tomcat-9.0.65/webapps/ROOT/view/customer/list_customer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case study 1/furama_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../case study 1/furama_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case study 1/task_furama.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../case study 1/task_furama.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/controller/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/controller/CustomerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/case study 2-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/case study 2-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/CustomerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/include/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/include/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/customer/add_customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/customer/add_customer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/customer/edit_customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/customer/edit_customer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/customer/list_customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/customer/list_customer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../servlet/furama_jsp_servlet/.gradle/6.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../servlet/furama_jsp_servlet/.gradle/6.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../servlet/furama_jsp_servlet/.gradle/6.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../servlet/furama_jsp_servlet/.gradle/6.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../servlet/furama_jsp_servlet/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../servlet/furama_jsp_servlet/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ss5/exercise/demo.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../ss5/exercise/demo.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +62,16 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Jsp File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -34,14 +92,17 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../servlet/furama_jsp_servlet" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.65" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.65" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
@@ -56,7 +117,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="3977077a-675c-42ea-a0b5-c100e89d7c4f" />
+        <option name="BASE_DIRECTORY_NAME" value="29d4c553-dd03-44ca-ad3b-e5336adce826" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -64,7 +125,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="50228" />
+        <option name="DEBUG_PORT" value="49853" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -148,6 +209,25 @@
       <workItem from="1659581731863" duration="193000" />
       <workItem from="1659582918778" duration="16010000" />
       <workItem from="1659607090313" duration="2623000" />
+      <workItem from="1659628179518" duration="44015000" />
+      <workItem from="1659760287378" duration="399000" />
+      <workItem from="1659760748367" duration="309000" />
+      <workItem from="1659761481475" duration="4391000" />
+      <workItem from="1659767354405" duration="39000" />
+      <workItem from="1659767448765" duration="4322000" />
+      <workItem from="1659771845882" duration="1041000" />
+      <workItem from="1659772916065" duration="26000" />
+      <workItem from="1659773734972" duration="549000" />
+      <workItem from="1659774351026" duration="87000" />
+      <workItem from="1659774673784" duration="1390000" />
+      <workItem from="1659776255087" duration="104000" />
+      <workItem from="1659776385970" duration="549000" />
+      <workItem from="1659776989753" duration="3446000" />
+      <workItem from="1659780592059" duration="490000" />
+      <workItem from="1659781193650" duration="2671000" />
+      <workItem from="1659783928117" duration="8249000" />
+      <workItem from="1659798559381" duration="7550000" />
+      <workItem from="1659807186214" duration="8116000" />
     </task>
     <servers />
   </component>

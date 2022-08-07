@@ -17,7 +17,7 @@
 
     <div class="container w-50 mt-5 p-2 bg-success" style="border: 1px solid grey; border-radius: 15px">
         <h3 align="center">CHỈNH SỬA KHÁCH HÀNG</h3>
-        <form class="row g-3 text-center" action="" method="post">
+        <form class="row g-3 text-center" action="/customers?action=create" method="post">
 
             <div class="col-md-12">
                 <label for="idCustomer" class="form-label">ID Khách hàng</label>

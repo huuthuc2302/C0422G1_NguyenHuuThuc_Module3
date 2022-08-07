@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -6,10 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>THÊM MỚI KHÁCH HÀNG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 
@@ -17,26 +19,19 @@
 
     <div class="container w-50 mt-5 p-2 bg-success" style="border: 1px solid grey; border-radius: 15px">
         <h3 align="center">THÊM MỚI KHÁCH HÀNG</h3>
-        <form class="row g-3 text-center" action="" method="post">
+        <form class="row g-3 text-center" action="/customers?action=create" method="post">
 
-            <div class="col-md-12">
-                <label for="idCustomer" class="form-label">ID Khách hàng</label>
-                <input type="text" class="form-control" id="idCustomer" name="idCustomer">
-            </div>
             <div class="col-md-12">
                 <label for="customer_type_id" class="form-label">Loại khách</label>
                 <select name=""  class="form-select" id="customer_type_id">
-                    <option value="None">Chọn loại khách</option>
-                    <option value="Diamond">Diamond</option>
-                    <option value="Platinium">Platinium</option>
-                    <option value="Gold">Gold</option>
-                    <option value="Silver">Silver</option>
-                    <option value="Member">Member</option>
+                    <c:forEach var="typeCustomer" items="${customerTypeList}">
+                        <option value="${typeCustomer.customerTypeId}">${typeCustomer.customerTypeName}</option>
+                    </c:forEach>
                 </select>
             </div>
             <div class="col-md-12">
                 <label for="name" class="form-label">Họ tên</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" value="">
             </div>
             <div class="col-md-12">
                 <label for="birthday" class="form-label">Ngày sinh</label>
@@ -52,24 +47,24 @@
             </div>
             <div class="col-md-12">
                 <label for="id_card" class="form-label">Số CMND</label>
-                <input type="text" class="form-control" id="id_card"  name="id_card" >
+                <input type="text" class="form-control" id="id_card" name="id_card" value="">
             </div>
             <div class="col-md-12">
                 <label for="phone" class="form-label">Số Điện Thoại</label>
-                <input type="text" class="form-control" id="phone" name="phone">
+                <input type="text" class="form-control" id="phone" name="phone" value="">
             </div>
             <div class="col-md-12">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="email">
+                <input type="text" class="form-control" id="email" name="email" value="">
             </div>
             <div class="col-md-12">
                 <label for="address" class="form-label">Địa chỉ</label>
-                <input type="text" class="form-control" id="address" name="address">
+                <input type="text" class="form-control" id="address" name="address" value="">
             </div>
 
 
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="submit" name="action" value="create" class="btn btn-primary">Lưu</button>
             </div>
 
         </form>
