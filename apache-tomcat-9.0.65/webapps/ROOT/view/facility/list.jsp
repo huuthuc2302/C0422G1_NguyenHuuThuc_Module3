@@ -18,7 +18,7 @@
     <center>
         <h1>QUẢN LÝ DỊCH VỤ</h1>
         <h3>
-            <a class="btn btn-outline-primary" href="add.jsp">Thêm mới dịch vụ</a>
+            <a class="btn btn-outline-primary" href="/facility?action=create">Thêm mới dịch vụ</a>
         </h3>
     </center>
 
@@ -32,86 +32,73 @@
                 <th>Diện tích sử dụng</th>
                 <th>Chi phí thuê </th>
                 <th>Số người tối đa</th>
-                <th>Kiểu thuê</th>
+                <th>Mã kiểu thuê</th>
+                <th>Mã loại dịch vụ</th>
                 <th>Tiêu chuẩn phòng</th>
                 <th>Mô tả tiện nghi</th>
-                <th>Số tầng</th>
                 <th>Diện tích hồ bơi</th>
+                <th>Số tầng</th>
+
                 <th>Dịch vụ miễn phí đi kèm</th>
+
                 <th colspan="2">Chức năng</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Villa Beach Front</td>
-                <td>25000</td>
-                <td>10000000</td>
-                <td>10</td>
-                <td>3</td>
-                <td>Vip</td>
-                <td>Có hồ bơi</td>
-                <td>4</td>
-                <td>500</td>
-                <td>1 Xe máy, 1 Xe đạp</td>
-                <td>
-                    <a type="button" class="btn btn-primary"  href="edit.jsp" onclick="">
-                        Sửa
-                    </a></td>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger" onclick="">
-                        Xóa
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>House Princess 02</td>
-                <td>10000</td>
-                <td>4000000</td>
-                <td>5</td>
-                <td>2</td>
-                <td>Normal</td>
-                <td>Có hồ bơi</td>
-                <td>2</td>
-                <td>100</td>
-                <td>karaoke</td>
-                <td>
-                    <a type="button" class="btn btn-primary"  href="edit.jsp" onclick="">
-                        Sửa
-                    </a></td>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger" onclick="">
-                        Xóa
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Room Twin 01</td>
-                <td>5000</td>
-                <td>1000000</td>
-                <td>2</td>
-                <td>4</td>
-                <td>Normal</td>
-                <td>Có tivi</td>
-                <td>1</td>
-                <td>null</td>
-                <td>1 Xe máy, 1 Xe đạp</td>
-                <td>
-                    <a type="button" class="btn btn-primary"  href="edit.jsp" onclick="">
-                        Sửa
-                    </a>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger" onclick="">
-                        Xóa
-                    </button>
-                </td>
-            </tr>
+            <c:forEach items="${facilityList}" var="facility">
+                <tr>
+                    <td>${facility.serviceId}</td>
+                    <td>${facility.serviceName}</td>
+                    <td>${facility.serviceArea}</td>
+                    <td>${facility.serviceCost}</td>
+                    <td>${facility.serviceMaxPeople}</td>
+                    <td>${mapRentType.get(facility.rentTypeId)}</td>
+                    <td>${mapServiceType.get(facility.serviceTypeId)}</td>
+                    <td>${facility.standardRoom}</td>
+                    <td>${facility.description}</td>
+                    <td>${facility.poolArea}</td>
+                    <td>${facility.numberOfFloor}</td>
+
+                    <td></td>
+
+                    <td>
+                        <a type="button" class="btn btn-primary"  href="/facility?action=update&facilityId=${facility.serviceId}">
+                            Sửa
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="showInfo('${facility.serviceId}','${facility.serviceName}')"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Xoá
+                        </button>
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">XOÁ DICH VỤ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            XÁC NHẬN XOÁ DỊCH VỤ
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-primary">Xoá</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        function showInfo(id, name) {
+            document.getElementById("facilityName").innerText = name;
+            document.getElementById("facilityId").value = id;
+        }
+    </script>
 
 <%@include file="/include/footer.jsp"%>
 
