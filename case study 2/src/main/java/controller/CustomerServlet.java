@@ -14,16 +14,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customers")
 public class CustomerServlet extends HttpServlet {
+
     private ICustomerService customerService = new CustomerService();
     private ICustomerTypeService customerTypeService = new CustomerTypeService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -40,25 +44,11 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    private void showFormUpdate(HttpServletRequest request, HttpServletResponse response) {
-        int customerId = Integer.parseInt(request.getParameter("customerId"));
-        Customer existCustomer = customerService.selectCustomer(customerId);
-        List<CustomerType> customerTypeList = customerTypeService.selectAll();
-        request.setAttribute("customerTypeList",customerTypeList);
-        request.setAttribute("customerList",existCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/edit_customer.jsp");
-        try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -79,13 +69,27 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) {
+
+    private void showFormUpdate(HttpServletRequest request, HttpServletResponse response) {
         int customerId = Integer.parseInt(request.getParameter("customerId"));
+        Customer existCustomer = customerService.selectCustomer(customerId);
+        List<CustomerType> customerTypeList = customerTypeService.selectAll();
+        request.setAttribute("customerTypeList",customerTypeList);
+        request.setAttribute("customerList",existCustomer);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/edit_customer.jsp");
         try {
-            customerService.deleteCustomer(customerId);
-        } catch (SQLException e) {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) {
+        int customerId = Integer.parseInt(request.getParameter("customerId"));
+            customerService.deleteCustomer(customerId);
         List<Customer> customerList = customerService.selectAllCustomer();
         request.setAttribute("customerList", customerList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/list_customer.jsp");
@@ -99,6 +103,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response) {
+        int customerId = Integer.parseInt(request.getParameter("customerId"));
         int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
         String customerName = request.getParameter("customerName");
         String customerBirth = request.getParameter("customerBirth");
@@ -108,12 +113,10 @@ public class CustomerServlet extends HttpServlet {
         String customerEmail = request.getParameter("customerEmail");
         String customerAddress = request.getParameter("customerAddress");
 
-        Customer customer = new Customer(customerTypeId, customerTypeId, customerName,customerBirth,customerGender,customerIdCard,customerPhone,customerEmail,customerAddress);
-        try {
-            customerService.updateCustomer(customer);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Customer customer = new Customer(customerId, customerTypeId, customerName,customerBirth,customerGender,customerIdCard,customerPhone,customerEmail,customerAddress);
+
+        customerService.updateCustomer(customer);
+
         List<CustomerType> customerTypeList = customerTypeService.selectAll();
         request.setAttribute("customerTypeList",customerTypeList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/edit_customer.jsp");
@@ -124,6 +127,7 @@ public class CustomerServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        showCustomerList(request,response);
     }
 
 
@@ -156,7 +160,6 @@ public class CustomerServlet extends HttpServlet {
 
 
     private void save(HttpServletRequest request, HttpServletResponse response) {
-        int customerId = Integer.parseInt(request.getParameter("customerId"));
         int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
         String customerName = request.getParameter("customerName");
         String customerBirth  = request.getParameter("customerBirth");
@@ -165,13 +168,9 @@ public class CustomerServlet extends HttpServlet {
         String customerPhone = request.getParameter("customerPhone");
         String customerEmail = request.getParameter("customerEmail");
         String customerAddress = request.getParameter("customerAddress");
-        Customer customer = new Customer(customerId, customerTypeId, customerName, customerBirth,
-                customerGender, customerIdCard, customerPhone, customerEmail, customerAddress);
-        try {
-            customerService.insertCustomer(customer);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Customer customer = new Customer(customerTypeId,customerName,customerBirth,customerGender,customerIdCard,customerPhone,customerEmail,customerAddress);
+        customerService.insertCustomer(customer);
+
         List<CustomerType> customerTypeList = customerTypeService.selectAll();
         request.setAttribute("customerTypeList",customerTypeList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/add_customer.jsp");

@@ -10,11 +10,11 @@ public interface ICustomerRepository {
 
     public Customer selectCustomer(int id);
 
-    public void insertCustomer(Customer customer) throws SQLException;
+    public void insertCustomer(Customer customer);
 
-    public boolean updateCustomer(Customer customer) throws SQLException;
+    public boolean updateCustomer(Customer customer);
 
-    public boolean deleteCustomer(int id) throws SQLException;
+    public boolean deleteCustomer(int id);
 
     public List<Customer> searchCustomer(String idSearch, String nameSearch);
 }

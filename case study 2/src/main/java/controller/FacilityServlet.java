@@ -27,6 +27,10 @@ public class FacilityServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         String action = request.getParameter("action");
         if (action == null){
             action = "";
@@ -46,6 +50,10 @@ public class FacilityServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         String action = request.getParameter("action");
         if (action == null){
             action = "";
@@ -70,12 +78,12 @@ public class FacilityServlet extends HttpServlet {
 
     private void showFacilityList(HttpServletRequest request, HttpServletResponse response) {
         List<Facility> facilityList = facilityService.selectAllFacility();
-        Map<Integer, String> mapFacilityType = facilityTypeService.selectFacilityType();
-        Map<Integer, String> mapRentType = rentTypeService.selectRentType();
+//        Map<Integer, String> mapFacilityType = facilityTypeService.selectFacilityType();
+//        Map<Integer, String> mapRentType = rentTypeService.selectRentType();
 
         request.setAttribute("facilityList",facilityList);
-        request.setAttribute("mapRentType",mapRentType);
-        request.setAttribute("mapFacilityType",mapFacilityType);
+//        request.setAttribute("mapRentType",mapRentType);
+//        request.setAttribute("mapFacilityType",mapFacilityType);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/facility/list.jsp");
         try {
             dispatcher.forward(request,response);
@@ -91,7 +99,7 @@ public class FacilityServlet extends HttpServlet {
         List<FacilityType> facilityTypeList = facilityTypeService.selectAll();
         request.setAttribute("rentTypeList",rentTypeList);
         request.setAttribute("serviceTypeList",facilityTypeList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/facility/create.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/facility/add.jsp");
         try {
             dispatcher.forward(request,response);
         } catch (ServletException e) {

@@ -35,7 +35,7 @@
                     <a class="nav-link font-weight-bold text-white " href="/customers?action=default">Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold text-white" href="view/facility/list.jsp">Facility</a>
+                    <a class="nav-link font-weight-bold text-white" href="/facility?action=deauft">Facility</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold text-white" href="view/contract/list_contract.jsp">Contract</a>

@@ -13,8 +13,8 @@ import java.util.List;
 
 public class FacilityRepository implements IFacilityRepository {
 
-    private final String SELECT_ALL_FACILITY = "SELECT * FROM service;";
-    private final String INSERT_NEW_VILLA = "insert into service (ten_dich_vu," +
+    private final String SELECT_ALL_FACILITY = "select * from dich_vu;";
+    private final String INSERT_NEW_VILLA = "insert into dich_vu (ten_dich_vu," +
             " dien_tich," +
             " chi_phi_thue," +
             " so_nguoi_toi_da," +
@@ -23,36 +23,38 @@ public class FacilityRepository implements IFacilityRepository {
             " tieu_chuan_phong," +
             " mo_ta_tien_nghi_khac," +
             " dien_tich_ho_boi," +
-            " so_tang)" +
-            "values (?,?,?,?,?,?,?,?,?,?);";
+            " so_tang" +"dich_vu_mien_phi_di_kem)"+
+            "values (?,?,?,?,?,?,?,?,?,?,?);";
 
 
     @Override
     public List<Facility> selectAllFacility() {
         List<Facility> facilityList = new ArrayList<>();
+
         Connection connection = BaseRepository.getConnectDB();
+
         try {
             PreparedStatement ps = connection.prepareStatement(SELECT_ALL_FACILITY);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
-                int serviceId = resultSet.getInt("ma_dich_vu");
-                String serviceName = resultSet.getString("ten_dich_vu");
-                int serviceArea = resultSet.getInt("dien_tich");
-                double serviceCost = resultSet.getDouble("chi_phi_thue");
-                int serviceMaxPeople = resultSet.getInt("so_nguoi_toi_da");
+                int facilityId = resultSet.getInt("ma_dich_vu");
+                String facilityName = resultSet.getString("ten_dich_vu");
+                int facilityArea = resultSet.getInt("dien_tich");
+                double facilityCost = resultSet.getDouble("chi_phi_thue");
+                int facilityMaxPeople = resultSet.getInt("so_nguoi_toi_da");
                 int rentTypeId = resultSet.getInt("ma_kieu_thue");
-                int serviceTypeId = resultSet.getInt("ma_loai_dich_vu");
+                int facilityTypeId = resultSet.getInt("ma_loai_dich_vu");
                 String standardRoom = resultSet.getString("tieu_chuan_phong");
                 String description = resultSet.getString("mo_ta_tien_nghi_khac");
                 double poolArea = resultSet.getDouble("dien_tich_ho_boi");
                 int numberOfFloor = resultSet.getInt("so_tang");
-                Facility facility = new Facility(serviceId,
-                        serviceName,
-                        serviceArea,
-                        serviceCost,
-                        serviceMaxPeople,
+                Facility facility = new Facility(facilityId,
+                        facilityName,
+                        facilityArea,
+                        facilityCost,
+                        facilityMaxPeople,
                         rentTypeId,
-                        serviceTypeId,
+                        facilityTypeId,
                         standardRoom,
                         description,
                         poolArea,

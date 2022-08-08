@@ -79,19 +79,20 @@ private static final String DELETE_CUSTOMER_SQL = "DELETE FROM khach_hang WHERE 
     }
 
     @Override
-    public void insertCustomer(Customer customer) throws SQLException {
+    public void insertCustomer(Customer customer){
         System.out.println(INSERT_NEW_CUSTOMER);
         Connection connection = BaseRepository.getConnectDB();
         try {
             PreparedStatement ps = connection.prepareStatement(INSERT_NEW_CUSTOMER);
             ps.setInt(1, customer.getCustomerTypeId());
             ps.setString(2, customer.getCustomerName());
-            ps.setDate(3, Date.valueOf(customer.getCustomerBirth()));
+            ps.setString(3, customer.getCustomerBirth());
             ps.setInt(4, customer.getCustomerGender());
             ps.setString(5, customer.getCustomerIdCard());
             ps.setString(6, customer.getCustomerPhone());
             ps.setString(7, customer.getCustomerEmail());
             ps.setString(8, customer.getCustomerAddress());
+
             System.out.println(ps);
             ps.executeUpdate();
         }catch (SQLException throwables){
@@ -100,7 +101,7 @@ private static final String DELETE_CUSTOMER_SQL = "DELETE FROM khach_hang WHERE 
     }
 
     @Override
-    public boolean updateCustomer(Customer customer) throws SQLException {
+    public boolean updateCustomer(Customer customer){
         Connection connection = BaseRepository.getConnectDB();
         try {
             PreparedStatement ps = connection.prepareStatement(UPDATE_CUSTOMER);
@@ -121,7 +122,7 @@ private static final String DELETE_CUSTOMER_SQL = "DELETE FROM khach_hang WHERE 
     }
 
     @Override
-    public boolean deleteCustomer(int id) throws SQLException {
+    public boolean deleteCustomer(int id){
         boolean rowDeleted = false;
         Connection connection = BaseRepository.getConnectDB();
         try { PreparedStatement statement = connection.prepareStatement(DELETE_CUSTOMER_SQL);
