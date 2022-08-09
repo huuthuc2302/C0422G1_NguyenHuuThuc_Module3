@@ -21,6 +21,11 @@
         <h3>
             <a class="btn btn-outline-primary" href="/customers?action=create&id=${customer.customerId}">Thêm mới khách hàng</a>
         </h3>
+        <h3 class="text-danger">
+            <c:if test="${message!=null}">
+                <p>${message}</p>
+            </c:if>
+        </h3>
     </center>
     <div class="container ">
         <div class="row">

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customers")
 public class CustomerServlet extends HttpServlet {
@@ -92,6 +93,9 @@ public class CustomerServlet extends HttpServlet {
             customerService.deleteCustomer(customerId);
         List<Customer> customerList = customerService.selectAllCustomer();
         request.setAttribute("customerList", customerList);
+
+        request.setAttribute("message", "Xoá thành công");
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/list_customer.jsp");
         try {
             dispatcher.forward(request, response);
@@ -117,8 +121,12 @@ public class CustomerServlet extends HttpServlet {
 
         customerService.updateCustomer(customer);
 
+        request.setAttribute("message", "Cập nhật thành công");
+        showCustomerList(request, response);
+
         List<CustomerType> customerTypeList = customerTypeService.selectAll();
         request.setAttribute("customerTypeList",customerTypeList);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/edit_customer.jsp");
         try {
             dispatcher.forward(request, response);
@@ -142,6 +150,7 @@ public class CustomerServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -162,24 +171,22 @@ public class CustomerServlet extends HttpServlet {
     private void save(HttpServletRequest request, HttpServletResponse response) {
         int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
         String customerName = request.getParameter("customerName");
-        String customerBirth  = request.getParameter("customerBirth");
+        String customerBirth = request.getParameter("customerBirth");
         int customerGender = Integer.parseInt(request.getParameter("customerGender"));
         String customerIdCard = request.getParameter("customerIdCard");
         String customerPhone = request.getParameter("customerPhone");
         String customerEmail = request.getParameter("customerEmail");
         String customerAddress = request.getParameter("customerAddress");
-        Customer customer = new Customer(customerTypeId,customerName,customerBirth,customerGender,customerIdCard,customerPhone,customerEmail,customerAddress);
+        Customer customer = new Customer(customerTypeId,
+                customerName,
+                customerBirth,
+                customerGender,
+                customerIdCard,
+                customerPhone,
+                customerEmail,
+                customerAddress);
         customerService.insertCustomer(customer);
-
-        List<CustomerType> customerTypeList = customerTypeService.selectAll();
-        request.setAttribute("customerTypeList",customerTypeList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/add_customer.jsp");
-        try {
-            dispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        request.setAttribute("message", "Thêm mới thành công");
+        showCustomerList(request, response);
     }
 }

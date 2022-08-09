@@ -31,6 +31,7 @@
             <div class="col-md-12">
                 <label for="facilityName" class="form-label">Tên dịch vụ</label>
                 <input type="text" class="form-control" id="facilityName" name="facilityName">
+
             </div>
             <div class="col-md-12">
                 <label for="facilityArea" class="form-label">Diện tích sử dụng</label>

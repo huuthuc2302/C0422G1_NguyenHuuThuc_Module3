@@ -12,9 +12,10 @@
 </head>
 <body>
 <nav class="navbar navbar-light bg-light">
+    <img class="ms-5" src="https://furamavietnam.com/wp-content/uploads/2018/08/logo@2x.png" alt="" width="60" height="80">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="https://furamavietnam.com/wp-content/uploads/2018/08/logo@2x.png" alt="" width="60" height="80">
+
         </a>
         <span>Nguyễn Hữu Thức</span>
     </div>

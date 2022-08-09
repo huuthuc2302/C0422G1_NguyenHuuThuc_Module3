@@ -20,6 +20,7 @@
 
     <div class="container w-50 mt-5 p-2 bg-success" style="border: 1px solid grey; border-radius: 15px">
         <h3 align="center">THÊM MỚI KHÁCH HÀNG</h3>
+
         <form class="row g-3 text-center" action="/customers?action=create" method="post">
 
             <div class="col-md-12">
@@ -33,6 +34,7 @@
             <div class="col-md-12">
                 <label for="name" class="form-label">Họ tên</label>
                 <input type="text" class="form-control" id="name" name="customerName">
+                <p style="margin-top: 10px;" >${name}</p>
             </div>
             <div class="col-md-12">
                 <label for="birthday" class="form-label">Ngày sinh</label>
@@ -66,6 +68,7 @@
 
             <div class="col-12">
                 <button type="submit" name="action" value="create" class="btn btn-primary">Lưu</button>
+
             </div>
 
         </form>
