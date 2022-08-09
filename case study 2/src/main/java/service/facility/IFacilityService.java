@@ -1,21 +1,25 @@
 package service.facility;
 
 import model.facility.Facility;
+import model.facility.FacilityType;
+import model.facility.RentType;
 
 import java.util.List;
-import java.util.Map;
 
 public interface IFacilityService {
+
     public List<Facility> selectAllFacility();
 
-    public Facility selectFacility(int id);
+    void insertFacility(Facility facility);
 
-    public Map<String, String> save(Facility facility);
+    void updateFacility(Facility facility);
 
-    public Map<String, String> updateFacility(Facility facility);
+    void deleteFacility(int id);
 
-    public boolean deleteFacility(int id);
+    Facility findByIdFacility(int id);
 
-    public List<Facility> searchFacility(String keyword);
+    List<RentType> showRentFacility();
+
+    List<FacilityType> showFacilityType();
 
 }

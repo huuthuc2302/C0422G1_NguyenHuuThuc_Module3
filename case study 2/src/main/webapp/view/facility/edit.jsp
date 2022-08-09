@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -17,70 +18,78 @@
 
 <%@include file="/include/header.jsp"%>
 
-    <div class="container w-50 mt-5 p-2 bg-success" style="border: 1px solid grey; border-radius: 15px">
+    <div class="container w-50 mt-5 p-2 bg-success" id="create" style="border: 1px solid grey; border-radius: 15px">
         <h3 align="center">CHỈNH SỬA DỊCH VỤ</h3>
-        <form class="row g-3 text-center" action="" method="post">
+        <form class="row g-3 text-center" action="/facility?action=update&facilityId=${facility.facilityId}" method="post">
             <div class="col-md-12">
                 <label class="form-label">Loại dịch vụ</label>
-                <select name=""  class="form-select" onchange="showFacilityInput(this)">
-                    <option value="None" >Chọn loại dịch vụ</option>
-                    <option value="Villa" >Villa</option>
-                    <option value="House" >House</option>
-                    <option value="Room" >Room</option>
+                <select id="type_facility" name="facilityTypeId" value="${facility.facilityTypeId}" class="form-select" onchange="showFacilityInput()">
+                    <option value="None" disabled >Chọn loại dịch vụ</option>
+                    <c:forEach items="${facilityList}" var="facilityType">
+                        <c:choose>
+                            <c:when test="${facility.facilityTypeId==facilityType.facilityTypeId}">
+                                <option value="${facilityType.facilityTypeId}" selected> ${facilityType.facilityTypeName}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${facilityType.facilityTypeId}" > ${facilityType.facilityTypeName}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                 </select>
             </div>
 
             <%--Dịch vụ mặc định--%>
             <div class="col-md-12">
-                <label for="name" class="form-label">Tên dịch vụ</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <label for="facilityName" class="form-label">Tên dịch vụ</label>
+                <input type="text" class="form-control" id="facilityName" name="facilityName" value="${facility.facilityName}">
             </div>
             <div class="col-md-12">
-                <label for="area" class="form-label">Diện tích sử dụng</label>
-                <input type="text" class="form-control" id="area" name="area">
+                <label for="facilityArea" class="form-label">Diện tích sử dụng</label>
+                <input type="text" class="form-control" id="facilityArea" name="facilityArea" value="${facility.facilityArea}">
             </div>
             <div class="col-md-12">
-                <label for="cost" class="form-label">Chi phí thuê</label>
-                <input type="text" class="form-control" id="cost"  name="cost" >
+                <label for="facilityCost" class="form-label">Chi phí thuê</label>
+                <input type="text" class="form-control" id="facilityCost"  name="facilityCost" value="${facility.facilityCost}">
             </div>
             <div class="col-md-12">
-                <label for="inputAddress2" class="form-label">Số lượng người tối đa </label>
-                <input type="text" class="form-control" id="inputAddress2"  name="max_people" >
+                <label for="facilityMaxPeople" class="form-label">Số lượng người tối đa </label>
+                <input type="text" class="form-control" id="facilityMaxPeople"  name="facilityMaxPeople" value="${facility.facilityMaxPeople}">
             </div>
             <div class="col-md-12">
-                <label for="inputCity" class="form-label">Kiểu thuê</label>
-                <input type="text" class="form-control" id="inputCity" name="rent_type_id">
+                <label for="rentTypeId" class="form-label">Kiểu thuê</label>
+                <input type="text" class="form-control" id="rentTypeId" name="rentTypeId" value="${facility.rentTypeId}">
             </div>
 
 
 
 
             <%--Villa và House sẽ có chung--%>
-            <div class="col-md-12" id="dv1" style="display: none">
-                <label for="standard_room" class="form-label">Tiêu chuẩn phòng</label>
-                <input type="text" class="form-control" id="standard_room" name="standard_room">
+            <div class="col-md-12" id="dv1">
+                <label for="standardRoom" class="form-label">Tiêu chuẩn phòng</label>
+                <input type="text" class="form-control" id="standardRoom" name="standardRoom" value="${facility.standardRoom}">
             </div>
-            <div class="col-md-12" id="dv2" style="display: none">
-                <label for="description_other_convenience" class="form-label">Mô tả tiện nghi khác</label>
-                <input type="text" class="form-control" id="description_other_convenience" name="description_other_convenience">
+            <div class="col-md-12" id="dv2">
+                <label for="description" class="form-label">Mô tả tiện nghi khác</label>
+                <input type="text" class="form-control" id="description" name="description" value="${facility.description}">
             </div>
-            <div class="col-md-12" id="dv3" style="display: none">
-                <label for="number_of_floors" class="form-label">Số tầng</label>
-                <input type="text" class="form-control" id="number_of_floors" name="number_of_floors">
+            <div class="col-md-12" id="dv3">
+                <label for="numberOfFloor" class="form-label">Số tầng</label>
+                <input type="text" class="form-control" id="numberOfFloor" name="numberOfFloor" value="${facility.numberOfFloor}">
             </div>
 
 
             <%--Riêng Villa sẽ có thêm--%>
-            <div class="col-md-12" id="dv4" style="display: none">
-                <label for="pool_area" class="form-label">Diện tích hồ bơi</label>
-                <input type="text" class="form-control" id="pool_area" name="pool_area">
+            <div class="col-md-12" id="dv4">
+                <label for="poolArea" class="form-label">Diện tích hồ bơi</label>
+                <input type="text" class="form-control" id="poolArea" name="poolArea" value="${facility.poolArea}"
+                >
             </div>
 
 
             <%--Riêng Room sẽ có thêm--%>
-            <div class="col-md-12" id="dv5" style="display: none">
-                <label for="facility_free" class="form-label">Dịch vụ miễn phí đi kèm</label>
-                <input type="text" class="form-control" id="facility_free" name="facility_free">
+            <div class="col-md-12" id="dv5">
+                <label for="facilityFree" class="form-label">Dịch vụ miễn phí đi kèm</label>
+                <input type="text" class="form-control" id="facilityFree" name="facilityFree" value="${facility.facilityFree}">
             </div>
 
             <div class="col-12">
@@ -93,8 +102,8 @@
 
     <script>
         function showFacilityInput(value) {
-            const v = value.value;
-            switch (v) {
+            let type = document.getElementById("type_facility").value;
+            switch (type) {
                 case 'None':
                     document.getElementById("dv1").style.display="none";
                     document.getElementById("dv2").style.display="none";
@@ -102,21 +111,21 @@
                     document.getElementById("dv4").style.display="none";
                     document.getElementById("dv5").style.display="none";
                     break;
-                case "Villa":
+                case "1":
                     document.getElementById("dv1").style.display="block";
                     document.getElementById("dv2").style.display="block";
                     document.getElementById("dv3").style.display="block";
                     document.getElementById("dv4").style.display="block";
                     document.getElementById("dv5").style.display="none";
                     break;
-                case "House":
+                case "2":
                     document.getElementById("dv1").style.display="block";
                     document.getElementById("dv2").style.display="block";
                     document.getElementById("dv3").style.display="block";
                     document.getElementById("dv4").style.display="none";
                     document.getElementById("dv5").style.display="none";
                     break;
-                case "Room":
+                case "3":
                     document.getElementById("dv1").style.display="none";
                     document.getElementById("dv2").style.display="none";
                     document.getElementById("dv3").style.display="none";

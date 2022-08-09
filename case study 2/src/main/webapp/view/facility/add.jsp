@@ -14,85 +14,84 @@
 
 <%@include file="/include/header.jsp"%>
 
-<div class="container w-50 mt-5 p-2 bg-success" style="border: 1px solid grey; border-radius: 15px">
+<div class="container w-50 mt-5 p-2 bg-success" id="create" style="border: 1px solid grey; border-radius: 15px">
         <h3 align="center">THÊM MỚI DỊCH VỤ</h3>
-        <form class="row g-3 text-center" action="/facility?action=create" method="get">
+        <form class="row g-3 text-center" action="/facility?action=create" method="post">
             <div class="col-md-12">
                 <label class="form-label">Loại dịch vụ</label>
-                <select name=""  class="form-select" onchange="showFacilityInput(this)">
+                <select id="type_facility" name="facilityTypeId" class="form-select" onchange="showFacilityInput()">
                     <option value="None" >Chọn loại dịch vụ</option>
-                    <option value="Villa" >Villa</option>
-                    <option value="House" >House</option>
-                    <option value="Room" >Room</option>
+                    <option value="1" >Villa</option>
+                    <option value="2" >House</option>
+                    <option value="3" >Room</option>
                 </select>
             </div>
 
                         <%--Dịch vụ mặc định--%>
             <div class="col-md-12">
-                <label for="name" class="form-label">Tên dịch vụ</label>
-                <input type="text" class="form-control" id="name" name="name" value="${facility.facilityName}">
+                <label for="facilityName" class="form-label">Tên dịch vụ</label>
+                <input type="text" class="form-control" id="facilityName" name="facilityName">
             </div>
             <div class="col-md-12">
-                <label for="area" class="form-label">Diện tích sử dụng</label>
-                <input type="text" class="form-control" id="area" name="area" value="${facility.facilityArea}">
+                <label for="facilityArea" class="form-label">Diện tích sử dụng</label>
+                <input type="text" class="form-control" id="facilityArea" name="facilityArea">
             </div>
             <div class="col-md-12">
-                <label for="cost" class="form-label">Chi phí thuê</label>
-                <input type="text" class="form-control" id="cost"  name="cost" value="${facility.facilityCost}">
+                <label for="facilityCost" class="form-label">Chi phí thuê</label>
+                <input type="text" class="form-control" id="facilityCost"  name="facilityCost">
             </div>
             <div class="col-md-12">
-                <label for="inputAddress2" class="form-label">Số lượng người tối đa </label>
-                <input type="text" class="form-control" id="inputAddress2"  name="max_people" value="${facility.facilityMaxPeople}">
+                <label for="facilityMaxPeople" class="form-label">Số lượng người tối đa </label>
+                <input type="text" class="form-control" id="facilityMaxPeople"  name="facilityMaxPeople">
             </div>
             <div class="col-md-12">
-                <label for="inputCity" class="form-label">Chọn kiểu thuê</label>
+                <label for="rentTypeId" class="form-label">Chọn kiểu thuê</label>
 
-                <select class="form-control" name="rentTypeId" id="inputCity">
+                <select class="form-control" name="rentTypeId" id="rentTypeId">
                     <c:forEach items="${rentTypeList}" var="rType">
                         <option value="${rType.rentTypeId}">${rType.rentTypeName}</option>
                     </c:forEach>
                 </select>
             </div>
-            <div class="col-md-12">
-                <label for="inputCity" class="form-label">Chọn loại dịch vụ</label>
+<%--            <div class="col-md-12">--%>
+<%--                <label for="facilityTypeId" class="form-label">Chọn loại dịch vụ</label>--%>
 
-                <select class="form-control" name="facilityTypeId" id="exampleFormControlSelect2">
-                    <c:forEach items="${facilityTypeId}" var="sType">
-                        <option value="${sType.facilityTypeId}">${sType.facilityTypeName}</option>
-                    </c:forEach>
-                </select>
-            </div>
+<%--                <select class="form-control" name="facilityTypeId" id="facilityTypeId">--%>
+<%--                    <c:forEach items="${facilityTypeList}" var="sType">--%>
+<%--                        <option value="${sType.facilityTypeId}">${sType.facilityTypeName}</option>--%>
+<%--                    </c:forEach>--%>
+<%--                </select>--%>
+<%--            </div>--%>
 
                         <%--Villa và House sẽ có chung--%>
             <div class="col-md-12" id="dv1" style="display: none">
-                <label for="standard_room" class="form-label">Tiêu chuẩn phòng</label>
-                <input type="text" class="form-control" id="standard_room" name="standard_room" value="${facility.standardRoom}">
+                <label for="standardRoom" class="form-label">Tiêu chuẩn phòng</label>
+                <input type="text" class="form-control" id="standardRoom" name="standardRoom">
             </div>
             <div class="col-md-12" id="dv2" style="display: none">
-                <label for="description_other_convenience" class="form-label">Mô tả tiện nghi khác</label>
-                <input type="text" class="form-control" id="description_other_convenience" name="description_other_convenience" value="${facility.description}">
+                <label for="description" class="form-label">Mô tả tiện nghi khác</label>
+                <input type="text" class="form-control" id="description" name="description">
             </div>
             <div class="col-md-12" id="dv3" style="display: none">
-                <label for="number_of_floors" class="form-label">Số tầng</label>
-                <input type="text" class="form-control" id="number_of_floors" name="number_of_floors" value="${facility.numberOfFloor}">
+                <label for="numberOfFloor" class="form-label">Số tầng</label>
+                <input type="text" class="form-control" value="0" id="numberOfFloor" name="numberOfFloor">
             </div>
-
 
                         <%--Riêng Villa sẽ có thêm--%>
             <div class="col-md-12" id="dv4" style="display: none">
-                <label for="pool_area" class="form-label">Diện tích hồ bơi</label>
-                <input type="text" class="form-control" id="pool_area" name="pool_area" value="${facility.poolArea}">
+                <label for="poolArea" class="form-label">Diện tích hồ bơi</label>
+                <input type="text" class="form-control"  value="0" id="poolArea" name="poolArea">
             </div>
 
 
                         <%--Riêng Room sẽ có thêm--%>
             <div class="col-md-12" id="dv5" style="display: none">
-                <label for="facility_free" class="form-label">Dịch vụ miễn phí đi kèm</label>
-                <input type="text" class="form-control" id="facility_free" name="facility_free">
+                <label for="facilityFree" class="form-label">Dịch vụ miễn phí đi kèm</label>
+                <input type="text" class="form-control" id="facilityFree" name="facilityFree">
             </div>
 
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="submit" name="action" value="create" class="btn btn-primary">Lưu</button>
                 <a href="/facility" class="btn btn-secondary w-50">Quay lại</a>
             </div>
         </form>
@@ -101,9 +100,9 @@
 
 
     <script>
-        function showFacilityInput(value) {
-            const v = value.value;
-            switch (v) {
+        function showFacilityInput() {
+            let type = document.getElementById("type_facility").value;
+            switch (type) {
                 case 'None':
                     document.getElementById("dv1").style.display="none";
                     document.getElementById("dv2").style.display="none";
@@ -111,21 +110,24 @@
                     document.getElementById("dv4").style.display="none";
                     document.getElementById("dv5").style.display="none";
                     break;
-                case "Villa":
+                case "1":
+                    // "Villa"
                     document.getElementById("dv1").style.display="block";
                     document.getElementById("dv2").style.display="block";
                     document.getElementById("dv3").style.display="block";
                     document.getElementById("dv4").style.display="block";
                     document.getElementById("dv5").style.display="none";
                     break;
-                case "House":
+                case "2":
+                // "House":
                     document.getElementById("dv1").style.display="block";
                     document.getElementById("dv2").style.display="block";
                     document.getElementById("dv3").style.display="block";
                     document.getElementById("dv4").style.display="none";
                     document.getElementById("dv5").style.display="none";
                     break;
-                case "Room":
+                case "3":
+                // "Room":
                     document.getElementById("dv1").style.display="none";
                     document.getElementById("dv2").style.display="none";
                     document.getElementById("dv3").style.display="none";

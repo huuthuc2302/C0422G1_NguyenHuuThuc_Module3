@@ -1,13 +1,14 @@
 package service.facility.impl;
 
 import model.facility.Facility;
+import model.facility.FacilityType;
+import model.facility.RentType;
 import repository.facility.IFacilityRepository;
 import repository.facility.impl.FacilityRepository;
 import service.facility.IFacilityService;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class FacilityService implements IFacilityService {
 
@@ -19,29 +20,32 @@ public class FacilityService implements IFacilityService {
     }
 
     @Override
-    public Facility selectFacility(int id) {
-        return null;
-    }
-
-    @Override
-    public Map<String, String> save(Facility facility) {
-        Map<String, String> map = new HashMap<>();
+    public void insertFacility(Facility facility) {
         facilityRepository.insertFacility(facility);
-        return map;
     }
 
     @Override
-    public Map<String, String> updateFacility(Facility facility) {
-        return null;
+    public void updateFacility(Facility facility) {
+        facilityRepository.updateFacility(facility);
     }
 
     @Override
-    public boolean deleteFacility(int id) {
-        return false;
+    public void deleteFacility(int id) {
+        facilityRepository.deleteFacility(id);
     }
 
     @Override
-    public List<Facility> searchFacility(String keyword) {
-        return null;
+    public Facility findByIdFacility(int id) {
+        return facilityRepository.findByIdFacility(id);
+    }
+
+    @Override
+    public List<RentType> showRentFacility() {
+        return facilityRepository.showRentFacility();
+    }
+
+    @Override
+    public List<FacilityType> showFacilityType() {
+        return facilityRepository.showFacilityType();
     }
 }

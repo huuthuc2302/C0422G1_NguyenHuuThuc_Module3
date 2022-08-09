@@ -4,7 +4,7 @@ public class RentType {
     private int rentTypeId;
     private String rentTypeName;
 
-    public RentType(int rentTypeId, String rentTypeName, double rentTypeCost) {
+    public RentType() {
     }
 
     public RentType(int rentTypeId, String rentTypeName) {

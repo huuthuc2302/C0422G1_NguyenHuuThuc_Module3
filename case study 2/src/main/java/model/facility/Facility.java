@@ -12,13 +12,14 @@ public class Facility {
     private String description;     //mô tả tiện nghi khác
     private double poolArea;    //diện tích hồ bơi
     private int numberOfFloor;  //số tầng
+    private String facilityFree ; //dich vụ free đi kèm
 
-    public Facility(String facilityName, int facilityArea, double facilityCost, int facilityMaxPeople, int rentTypeId, int facilityTypeId, String standardRoom, String description, double poolArea, int numberOfFloor) {
+    public Facility() {
     }
 
-    public Facility(int facilityId, String facilityName, int facilityArea, double facilityCost,
-                    int facilityMaxPeople, int rentTypeId, int facilityTypeId, String standardRoom,
-                    String description, double poolArea, int numberOfFloor) {
+    public Facility(int facilityId, String facilityName, int facilityArea, double facilityCost, int facilityMaxPeople,
+                    int rentTypeId, int facilityTypeId, String standardRoom, String description, double poolArea,
+                    int numberOfFloor, String facilityFree) {
         this.facilityId = facilityId;
         this.facilityName = facilityName;
         this.facilityArea = facilityArea;
@@ -30,6 +31,23 @@ public class Facility {
         this.description = description;
         this.poolArea = poolArea;
         this.numberOfFloor = numberOfFloor;
+        this.facilityFree = facilityFree;
+    }
+
+    public Facility(String facilityName, int facilityArea, double facilityCost, int facilityMaxPeople, int rentTypeId,
+                    int facilityTypeId, String standardRoom, String description, double poolArea, int numberOfFloor,
+                    String facilityFree) {
+        this.facilityName = facilityName;
+        this.facilityArea = facilityArea;
+        this.facilityCost = facilityCost;
+        this.facilityMaxPeople = facilityMaxPeople;
+        this.rentTypeId = rentTypeId;
+        this.facilityTypeId = facilityTypeId;
+        this.standardRoom = standardRoom;
+        this.description = description;
+        this.poolArea = poolArea;
+        this.numberOfFloor = numberOfFloor;
+        this.facilityFree = facilityFree;
     }
 
     public int getFacilityId() {
@@ -118,6 +136,14 @@ public class Facility {
 
     public void setNumberOfFloor(int numberOfFloor) {
         this.numberOfFloor = numberOfFloor;
+    }
+
+    public String getFacilityFree() {
+        return facilityFree;
+    }
+
+    public void setFacilityFree(String facilityFree) {
+        this.facilityFree = facilityFree;
     }
 }
 

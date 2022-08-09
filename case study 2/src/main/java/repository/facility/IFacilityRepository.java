@@ -1,20 +1,25 @@
 package repository.facility;
 
 import model.facility.Facility;
+import model.facility.FacilityType;
+import model.facility.RentType;
 
 import java.util.List;
 
 public interface IFacilityRepository {
-    public List<Facility> selectAllFacility();
 
-    public Facility selectEmployee(int id);
+    public List<Facility> selectAllFacility();
 
     public void insertFacility(Facility facility);
 
-    public boolean updateFacility(Facility facility);
+    public void updateFacility(Facility facility);
 
-    public boolean deleteFacility(int id);
+    public void deleteFacility(int id);
 
-    public List<Facility> searchFacility(String keyword);
+    Facility findByIdFacility(int id);
+
+    List<RentType> showRentFacility();
+
+    List<FacilityType> showFacilityType();
 
 }

@@ -41,6 +41,7 @@
                 <th>Mô tả tiện nghi</th>
                 <th>Diện tích hồ bơi</th>
                 <th>Số tầng</th>
+                <th>Dịch vụ Free đi kèm</th>
 
                 <th colspan="2">Chức năng</th>
             </tr>
@@ -57,49 +58,55 @@
                     <td>${facility.description}</td>
                     <td>${facility.poolArea}</td>
                     <td>${facility.numberOfFloor}</td>
+                    <td>${facility.facilityFree}</td>
 
                     <td>
-                        <a type="button" class="btn btn-primary"  href="/facility?action=update&facilityId=${facility.facilityId}">
+                        <a type="button" class="btn btn-primary"  href="/facility?action=update&facilityID=${facility.facilityId}">
                             Sửa
                         </a>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" onclick="showInfo('${facility.facilityId}','${facility.facilityName}')"
-                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" onclick="showInfoDelete('${facility.facilityId}','${facility.facilityName}')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Xoá
                         </button>
                     </td>
                 </tr>
             </c:forEach>
         </table>
+
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">XOÁ DICH VỤ</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            XÁC NHẬN XOÁ DỊCH VỤ
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary">Xoá</button>
+            <form action="/facility?action=delete" method="post">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input hidden type="text" name="facilityId" id="deleteId">
+                                <span>Bạn có muốn xóa : </span><span id="deleteName"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit"  class="btn btn-primary">Xoá</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        function showInfo(id, name) {
-            document.getElementById("facilityName").innerText = name;
-            document.getElementById("facilityId").value = id;
-        }
-    </script>
-
+            </form>
+            <script>
+                function showInfoDelete(id,name) {
+                    document.getElementById("deleteId").value= id;
+                    document.getElementById("deleteName").innerText=name;
+                }
+            </script>
 <%@include file="/include/footer.jsp"%>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous">
+
+    </script>
 </body>
 </html>
