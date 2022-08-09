@@ -33,8 +33,9 @@
             </div>
             <div class="col-md-12">
                 <label for="name" class="form-label">Họ tên</label>
-                <input type="text" class="form-control" id="name" name="customerName">
-                <p style="margin-top: 10px;" >${name}</p>
+                <input type="text" class="form-control" id="name" name="customerName"
+                       placeholder="Nguyen Van A" required>
+                <p style="color: white">${name}</p>
             </div>
             <div class="col-md-12">
                 <label for="birthday" class="form-label">Ngày sinh</label>
@@ -50,15 +51,21 @@
             </div>
             <div class="col-md-12">
                 <label for="id_card" class="form-label">Số CMND</label>
-                <input type="text" class="form-control" id="id_card" name="customerIdCard">
+                <input type="text" class="form-control" id="id_card" name="customerIdCard"
+                       placeholder="XXXXXXXXX or XXXXXXXXXXX" required>
+                <p style="color: white">${idCard}</p>
             </div>
             <div class="col-md-12">
                 <label for="phone" class="form-label">Số Điện Thoại</label>
-                <input type="text" class="form-control" id="phone" name="customerPhone">
+                <input type="text" class="form-control" id="phone" name="customerPhone"
+                       placeholder="090xxxxxxx or (84)91xxxxxxx" required>
+                <p style="color: white">${phone}</p>
             </div>
             <div class="col-md-12">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="customerEmail">
+                <input type="text" class="form-control" id="email" name="customerEmail"
+                       placeholder="abc123@gmail.com" required>
+                <p style="color: white">${email}</p>
             </div>
             <div class="col-md-12">
                 <label for="address" class="form-label">Địa chỉ</label>

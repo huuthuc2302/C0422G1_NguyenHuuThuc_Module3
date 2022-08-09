@@ -16,6 +16,9 @@ public class CustomerService implements ICustomerService {
     private ICustomerRepository customerRepository = new CustomerRepository();
 
     public static final String REGEX_NAME = "^([A-Z][a-z]*)+(\\s[A-Z][a-z]*)*";
+    public static final String REGEX_NUMBER = "^([0-9]{11}|[0-9]{9})";
+    public static final String REGEX_PHONE = "^(090[0-9]{7})|(091[0-9]{7})|(\\(84\\)\\+90[0-9]{7})|(\\(84\\)\\+91[0-9]{7})$";
+    public static final String REGEX_EMAIL = "^[A-Za-z0-9+_.-]+@(.+)$";
 
     @Override
     public List<Customer> selectAllCustomer() {
@@ -27,35 +30,44 @@ public class CustomerService implements ICustomerService {
         return customerRepository.selectCustomer(id);
     }
 
+    @Override
+    public Map<String, String> insertCustomer(Customer customer) {
+        Map<String, String> map = new HashMap<>();
+        boolean flag = true;
+        if (!Pattern.matches(REGEX_NAME,customer.getCustomerName())){
+            flag = false;
+            map.put("name","Tên phải viết hoa chữ cái đầu");
+        }
+        if (!Pattern.matches(REGEX_NUMBER,customer.getCustomerIdCard())){
+            flag = false;
+            map.put("idCard","Số CMND phải có định dạng XXXXXXXXX hoặc XXXXXXXXXXXX (X = 0-9)");
+        }
+        if (!Pattern.matches(REGEX_PHONE,customer.getCustomerPhone())){
+            flag = false;
+            map.put("phone","Số điện thoại có định dạng 090xxxxxxx hoặc (84)+90xxxxxxx");
+        }
+        if (!Pattern.matches(REGEX_EMAIL,customer.getCustomerEmail())){
+            flag = false;
+            map.put("email","Email phải có định dạng abcxyz@gmail.com");
+        }
+        return map;
+    }
+
+    @Override
+    public Map<String, String> updateCustomer(Customer customer) {
+        return null;
+    }
+
+
 //    @Override
-//    public Map<String, String> insertCustomer(Customer customer) {
-//        Map<String, String> map = new HashMap<>();
-//        boolean flag = true;
-//        if (!Pattern.matches(REGEX_NAME,customer.getCustomerName())){
-//            flag = false;
-//            map.put("name","Tên phải viết hoa chữ cái đầu");
-//        }
-//        if (flag){
-//            customerRepository.insertCustomer(customer);
-//        }
-//        return map;
+//    public void insertCustomer(Customer customer){
+//        customerRepository.insertCustomer(customer);
 //    }
 //
 //    @Override
-//    public Map<String, String> updateCustomer(Customer customer) {
-//        return null;
+//    public boolean updateCustomer(Customer customer) {
+//        return customerRepository.updateCustomer(customer);
 //    }
-
-
-    @Override
-    public void insertCustomer(Customer customer){
-        customerRepository.insertCustomer(customer);
-    }
-
-    @Override
-    public boolean updateCustomer(Customer customer) {
-        return customerRepository.updateCustomer(customer);
-    }
 
     @Override
     public boolean deleteCustomer(int id) {

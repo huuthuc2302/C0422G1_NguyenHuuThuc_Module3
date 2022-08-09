@@ -12,13 +12,13 @@ public interface ICustomerService {
 
     public Customer selectCustomer(int id);
 
-    public void insertCustomer(Customer customer);
-
-    public boolean updateCustomer(Customer customer);
-
-//    public Map<String, String> insertCustomer(Customer customer);
+//    public void insertCustomer(Customer customer);
 //
-//    public Map<String, String> updateCustomer(Customer customer);
+//    public boolean updateCustomer(Customer customer);
+
+    public Map<String, String> insertCustomer(Customer customer);
+
+    public Map<String, String> updateCustomer(Customer customer);
 
 
     public boolean deleteCustomer(int id);
